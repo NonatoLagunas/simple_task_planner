@@ -24,7 +24,7 @@ class SpeechGeneratorTasks
                                              to-speech task */
 
     public:
-        /*
+        /**
          * @brief Class constructor
          * 
          * Creates a new SpeechGeneratorTasks object.
@@ -36,7 +36,7 @@ class SpeechGeneratorTasks
          */
         SpeechGeneratorTasks(std::string syncSpeechServiceName="/spg_say", 
                 std::string asyncSpeechServiceName="/spg_say");
-        /*
+        /**
          * @brief Performs a synchronous text-to-speech task.
          * 
          * Makes a call to a ROS service, advertised by the BBROS-Bridge
@@ -49,7 +49,7 @@ class SpeechGeneratorTasks
          * @return true if the task was performed succesfully, false otherwise
          */
         bool syncSpeech(std::string textToSpeech, int timeOut);
-        /*
+        /**
          * @brief Performs an asynchronous text-to-speech task.
          * 
          * Makes a call to a ROS service, advertised by the BBROS-Bridge
