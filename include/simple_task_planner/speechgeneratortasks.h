@@ -16,8 +16,12 @@
 class SpeechGeneratorTasks
 {
     private:
-        std::string m_syncSpeechServiceName; 
-        std::string m_asyncSpeechServiceName; 
+        std::string m_syncSeechServName; /**< Stores the name of the service 
+                                           which will perform the sync text-to
+                                           -speech task */
+        std::string m_asyncSpeechServName; /**< Stores the name of the service
+                                             which will perform the async text-
+                                             to-speech task */
 
     public:
         /*
