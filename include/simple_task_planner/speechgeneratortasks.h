@@ -15,13 +15,25 @@
 #include "bbros_bridge/Default_ROS_BB_Bridge.h"
 class SpeechGeneratorTasks
 {
+    private:
+        std::string m_serviceName; /**< Stores the name of the service which
+                                     will perform the speech generator tasks */
     public:
         /*
-         * @brief Class Constructor
+         * @brief Class default constructor
          * 
          * Creates a new SpeechGeneratorTasks object.
          */
         SpeechTasks();
+        /*
+         * @brief Class Constructor
+         * 
+         * Creates a new SpeechGeneratorTasks object.
+         *
+         * @param speechServiceName The name of the service which will perform 
+         * the speech generator tasks
+         */
+        SpeechTasks(std::string speechServiceName);
         /*
          * @brief Performs a synchronous text-to-speech task.
          * 
