@@ -22,7 +22,6 @@ class SpeechGeneratorTasks
          * Creates a new SpeechGeneratorTasks object.
          */
         SpeechTasks();
-    private:
         /*
          * @brief Performs a synchronous text-to-speech task.
          * 
