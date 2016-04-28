@@ -8,11 +8,19 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  message_generation
+
+  #Package dependencies
+  bbros_bridge
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
+include_directories(
+    include
+    ${catkin_INCLUDE_DIRS}
+)
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -100,7 +108,7 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES simple_task_planner
 #  CATKIN_DEPENDS roscpp rospy std_msgs
 #  DEPENDS system_lib
@@ -112,10 +120,13 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+
 # include_directories(include)
-include_directories(
-  ${catkin_INCLUDE_DIRS}
-)
+file(GLOB_RECURSE headers "include/simple_task_planner/*.h*")
+file(GLOB_RECURSE sources "include/simple_task_planner/*.c*" "src/*.c*")
+#include_directories(
+#  ${catkin_INCLUDE_DIRS}
+#)
 
 ## Declare a C++ library
 # add_library(simple_task_planner
@@ -128,16 +139,21 @@ include_directories(
 # add_dependencies(simple_task_planner ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Declare a C++ executable
-# add_executable(simple_task_planner_node src/simple_task_planner_node.cpp)
+add_executable(simple_task_planner_node ${sources} ${headers})
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
-# add_dependencies(simple_task_planner_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Specify libraries to link a library or executable target against
-# target_link_libraries(simple_task_planner_node
-#   ${catkin_LIBRARIES}
-# )
+#add_dependencies(
+#    simple_task_planner_node 
+#    ${${PROJECT_NAME}_EXPORTED_TARGETS} 
+#    ${catkin_EXPORTED_TARGETS}
+#)
+#
+### Specify libraries to link a library or executable target against
+ target_link_libraries(
+    simple_task_planner_node
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##
