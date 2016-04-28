@@ -16,24 +16,22 @@
 class SpeechGeneratorTasks
 {
     private:
-        std::string m_serviceName; /**< Stores the name of the service which
-                                     will perform the speech generator tasks */
+        std::string m_syncSpeechServiceName; 
+        std::string m_asyncSpeechServiceName; 
+
     public:
         /*
-         * @brief Class default constructor
-         * 
-         * Creates a new SpeechGeneratorTasks object.
-         */
-        SpeechTasks();
-        /*
-         * @brief Class Constructor
+         * @brief Class constructor
          * 
          * Creates a new SpeechGeneratorTasks object.
          *
-         * @param speechServiceName The name of the service which will perform 
-         * the speech generator tasks
+         * @param syncSpeechServiceName The name of the service which will 
+         * perform the synchronous text-to-speech task. Default "/spg_say"
+         * @param asyncSpeechServiceName The name of the service which will 
+         * perform the asynchronous text-to-speech task. Default "/spg_say"
          */
-        SpeechTasks(std::string speechServiceName);
+        SpeechTasks(std::string syncSpeechServiceName="/spg_say", 
+                std::string asyncSpeechServiceName="/spg_say");
         /*
          * @brief Performs a synchronous text-to-speech task.
          * 
