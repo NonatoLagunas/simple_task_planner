@@ -43,6 +43,6 @@ class LangUnderstandingTasks
          * @return true if the task was performed succesfully, false otherwise
          */
         bool parseSentence(std::string sentenceToParse, 
-                std::string& parseResult);
+                std::string &parseResult);
 };
 #endif

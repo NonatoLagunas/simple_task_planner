@@ -1,14 +1,15 @@
-LangUnderstandingTasks::LangUnderstandingTasks(
-        std::string parseSentenceServName) : m_parseSentenceServName(
-            parseSentenceServName)
+#include "simple_task_planner/langunderstandingtasks.h"
+
+LangUnderstandingTasks::LangUnderstandingTasks
+    (std::string parseSentenceServName) : m_parseSentenceServName(parseSentenceServName)
 {
 }
 
-bool LangUnderstandingTasks::LangUnparseSentence(std::string sentenceToParse, 
+bool LangUnderstandingTasks::parseSentence(std::string sentenceToParse, 
         std::string &parseResult)
 {
 	ros::NodeHandle nodeHandler;
-	ros::ServiceClient client = n.serviceClient
+	ros::ServiceClient client = nodeHandler.serviceClient
         <language_understanding::parse_sentence>(m_parseSentenceServName);
 
 	language_understanding::parse_sentence srv;
