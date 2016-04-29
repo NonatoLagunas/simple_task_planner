@@ -2,7 +2,7 @@
  * @class SpeechGeneratorTasks
  * @brief Perform speech generator tasks.
  *
- * Prform the speech generator tasks using the Microsoft SPGEN module, 
+ * Perform the speech generator tasks using the Microsoft SPGEN module, 
  * running on Windows and connected to BlackBoard, via BBROS Bridge.
  * 
  * @author R. Nonato Lagunas (nonato)
