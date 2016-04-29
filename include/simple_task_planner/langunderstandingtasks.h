@@ -30,7 +30,7 @@ class LangUnderstandingTasks
          * perform the synchronous text-to-speech task. Default "/spg_say"
          */
         LangUnderstandingTasks(std::string parseSentenceServName=
-                "language_understanding/parse_sentence");
+                "/language_understanding/parse_sentence");
         /**
          * @brief Performs the parse sentence task.
          * 
