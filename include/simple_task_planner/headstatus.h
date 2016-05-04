@@ -1,9 +1,10 @@
 /**
  * @class HeadStatus
- * @brief Reads and stores the status of the robot's head.
+ * @brief Reads and modifies the current status of the robot's head.
  *
  * Reads the robot's head status from ROS, from the corresponding topics/servi-
- * ces published and/or advertised by the hardware head modules. 
+ * ces published and/or advertised by the hardware head modules. Also it writes
+ * the news values for the head status.
  * 
  * @author R. Nonato Lagunas (nonato)
  * @version 0.1
@@ -16,6 +17,9 @@
 class HeadStatus
 {
     private:
+        ros::Publisher m_headPosePublisher; /**< ROS publisher for the head
+                                              pose topic*/
+
         std::string m_headPoseTopic; /**< Stores the name of the topic from 
                                        where the head status will be obtained*/
 
@@ -31,7 +35,7 @@ class HeadStatus
          *
          * @param poseMsg The new value of the topic when it's updated. 
          */
-        void hdCurrentPoseCallback(
+        void headPoseCallback(
                 const std_msgs::Float32MultiArray::ConstPtr& msg);
     public:
         /**
@@ -69,5 +73,17 @@ class HeadStatus
          * @return void
          */
         void getHeadPose(float &headPan, float &headTilt);
+
+        /**
+         * @brief Set the goal values for the head pose.
+         *
+         * Receives two float values that represent the goal head tilt and pan,
+         * and writes it to the corresponding ROS topic.
+         * 
+         * @param headPan The goal head pan value.
+         * @param headPan The goal head tilt value.
+         * @return void
+         */
+        void setHeadPose(float headPan, float headTilt);
 };
 #endif
