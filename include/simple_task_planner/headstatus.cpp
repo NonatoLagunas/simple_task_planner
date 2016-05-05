@@ -3,15 +3,18 @@
 HeadStatus::HeadStatus(ros::NodeHandle &nh, std::string headPoseTopic):
     m_headPoseTopic(headPoseTopic)
 {
-    ros::Subscriber subHeadCurrentPose = nh.subscribe(m_headPoseTopic, 100, &HeadStatus::headPoseCallback, this);
+    ros::Subscriber subHeadCurrentPose = nh.subscribe(m_headPoseTopic, 100,
+            &HeadStatus::headPoseCallback, this);
 
-    m_headPosePublisher = nh.advertise<std_msgs::Float32MultiArray>(m_headPoseTopic, 100);
+    m_headPosePublisher = nh.advertise<std_msgs::Float32MultiArray>(
+            m_headPoseTopic, 100);
 }
 
-void HeadStatus::headPoseCallback(const std_msgs::Float32MultiArray::ConstPtr& msg)
+void HeadStatus::headPoseCallback(const std_msgs::Float32MultiArray::ConstPtr
+        &poseMsg)
 {
-    m_headPan = msg->data[0];
-    m_headTilt = msg->data[1];
+    m_headPan = poseMsg->data[0];
+    m_headTilt = poseMsg->data[1];
 }
 
 float HeadStatus::getHeadPan()

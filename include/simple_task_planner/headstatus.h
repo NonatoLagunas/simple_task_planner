@@ -36,7 +36,7 @@ class HeadStatus
          * @param poseMsg The new value of the topic when it's updated. 
          */
         void headPoseCallback(
-                const std_msgs::Float32MultiArray::ConstPtr& msg);
+                const std_msgs::Float32MultiArray::ConstPtr& poseMsg);
     public:
         /**
          * @brief Class constructor
