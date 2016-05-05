@@ -17,9 +17,9 @@ class SpeechRecognitionStatus
 {
     private:
 
-        std::string m_sprecRecoSentencesTopic; /**< Stores the name of the 
-                                                 topic where the recognized
-                                                 sentences will be writen*/ 
+        std::string m_recoSentencesTopic; /**< Stores the name of the 
+                                            topic where the recognized
+                                            sentences will be writen*/ 
 
         /**
          * @brief Current recognized sentence callback
@@ -42,7 +42,7 @@ class SpeechRecognitionStatus
          * updated with the current recognized speech value.
          */
         SpeechRecognitionStatus(ros::NodeHandle &nh, std::string 
-                sprecRecoSentencesTopic= "recognizedSpeech");
+                recoSentencesTopic= "recognizedSpeech");
         
         /**
          * @brief Returns the value of the current head pan and tilt by 
