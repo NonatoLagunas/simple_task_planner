@@ -8,6 +8,7 @@ set(
 	"bbros_bridge"
     "language_understanding"
 	"hri"
+	"planning"
 )
 
 foreach(DEP ${TASK_PLANER_DEP})
