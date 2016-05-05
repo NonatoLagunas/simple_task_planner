@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['speechgeneratortasks',['SpeechGeneratorTasks',['../class_speech_generator_tasks.html',1,'']]]
+  ['headstatus',['HeadStatus',['../class_head_status.html',1,'']]]
 ];
