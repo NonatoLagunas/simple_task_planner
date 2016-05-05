@@ -1,3 +1,4 @@
+#include "simple_task_planner/speechrecognitionstatus.h"
 #include "simple_task_planner/langunderstandingtasks.h"
 #include "simple_task_planner/speechgeneratortasks.h"
 #include "simple_task_planner/headstatus.h"
@@ -13,6 +14,7 @@ int main(int argc, char** argv)
     HeadStatus hdStatus(nodeHandler);
     std::cout << "sub 2 " << std::endl;
     HeadStatus hdStatus2(nodeHandler);
+    SpeechRecognitionStatus spStatus(nodeHandler);
     SpeechGeneratorTasks spgExecuter;
     LangUnderstandingTasks langUndExecuter;
 
