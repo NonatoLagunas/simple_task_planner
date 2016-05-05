@@ -4,8 +4,14 @@ SpeechRecognitionStatus::SpeechRecognitionStatus(ros::NodeHandle &nh,
         std::string recoSentencesTopic) : 
     m_recoSentencesTopic(recoSentencesTopic)
 {
+    /**
+     * The listen mode is turned off by default
+     */
     m_listenActivated = false;
 
+    /**
+     * Subscribe to the recognized speech ros topic
+     */
     ros::Subscriber subHeadCurrentPose = nh.subscribe(m_recoSentencesTopic,
             100, &SpeechRecognitionStatus::recoSentenceCallback, this);
 }
@@ -13,9 +19,18 @@ SpeechRecognitionStatus::SpeechRecognitionStatus(ros::NodeHandle &nh,
 void SpeechRecognitionStatus::recoSentenceCallback(const 
         hri_msgs::RecognizedSpeech::ConstPtr &recoSentencesMsg)
 {
+    /**
+     * Clear the last recognized sentences queue in order to enqueue the new
+     * recognized sentences
+     */
     clearRecoSentencesQueue(m_lastRecoSentencesQueue);
 
     int hypothesisCount = recoSentencesMsg->hypotesis.size();
+    /**
+     * Add each recognized sentence to the last recognized sentences queue and, 
+     * if the listen mode is activated, in the listen recognized sentences 
+     * queue.
+     */
     for(int i=0; i<hypothesisCount; i++)
     {
         RecognizedSentence currentHypothesis(recoSentencesMsg->hypotesis[i], 
@@ -40,7 +55,13 @@ void SpeechRecognitionStatus::stopListening()
 void SpeechRecognitionStatus::clearRecoSentencesQueue (
         std::queue<RecognizedSentence> &queue)
 {
+    /**
+     * Creates an empty queue
+     */
     std::queue<RecognizedSentence> emptyQueue;
+    /**
+     * Swap the receiven queue with the empty queue
+     */
     std::swap( queue, emptyQueue );
 }
 

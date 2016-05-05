@@ -78,7 +78,8 @@ class SpeechRecognitionStatus
         /**
          * @brief Class constructor
          * 
-         * Creates a new SpeechRecognitionStatus object.
+         * Creates a new SpeechRecognitionStatus object with listen mode 
+         * deactivated by default.
          *
          * @param nh The ROS Node Handler of the simple task planner node.
          * @param sprecRecoSentencesTopic The name of the topic which will be 
