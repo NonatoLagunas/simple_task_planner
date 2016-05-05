@@ -1,4 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
+include (${CMAKE_CURRENT_SOURCE_DIR}/dummy/DepCheck.cmake OPTIONAL)
+
 project(simple_task_planner)
 
 ## Find catkin macros and libraries
@@ -12,6 +14,7 @@ find_package(catkin REQUIRED COMPONENTS
 
   #Package dependencies
   bbros_bridge
+  hri_msgs
 )
 
 ## System dependencies are found with CMake's conventions
