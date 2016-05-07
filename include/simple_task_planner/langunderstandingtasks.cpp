@@ -1,26 +1,58 @@
 #include "simple_task_planner/langunderstandingtasks.h"
 
-LangUnderstandingTasks::LangUnderstandingTasks
-    (std::string parseSentenceServName) : m_parseSentenceServName(parseSentenceServName)
+LangUnderstandingTasks::LangUnderstandingTasks (
+        std::string parseSentenceServName) : m_parseSentenceServName(
+            parseSentenceServName)
 {
 }
 
 bool LangUnderstandingTasks::parseSentence(std::string sentenceToParse, 
-        std::string &parseResult)
+        CommandFrame &parseResult)
 {
+    /**
+     * Create a client object to call the ROS service
+     */
 	ros::NodeHandle nodeHandler;
 	ros::ServiceClient client = nodeHandler.serviceClient
-        <language_understanding::parse_sentence>(m_parseSentenceServName);
+        <planning_msgs::parse_sentence_cfr>(m_parseSentenceServName);
 
-	language_understanding::parse_sentence srv;
+    /**
+     * Create a srv object to send the request to the ROS service
+     */
+	planning_msgs::parse_sentence_cfr srv;
 	srv.request.sentence = sentenceToParse;
 	
+    /**
+     * Call the ROS service
+     */
 	if(client.call(srv))
 	{
-		parseResult = srv.response.conceptual_dependency;
-		/*verify if the sentence was succesfully parsed*/
-		if(srv.response.conceptual_dependency.compare("not_parsed") != 0)
+		/**
+         * Verify if the sentence was succesfully parsed
+         */
+		if(srv.response.cfr.command.compare("NO_INTERPRETATION") != 0)
 			return true;
+
+        /**
+         * To store the command an parameters resulting from the parsing.
+         */
+        std::string resultCommand;
+        std::map<std::string, std::string> resultParams;
+
+        /**
+         * Storing the parameters resulting from the parsing.
+         */
+        resultCommand = srv.response.cfr.command;
+        for(int i=0; i<srv.response.cfr.frame_id.size(); i++)
+        {
+            resultParams.insert(std::pair<std::string, std::string> (
+                        srv.response.cfr.frame_id[i], 
+                        srv.response.cfr.frame_value[i]
+                        ));
+        }
+        parseResult.command = resultCommand;
+        parseResult.params = resultParams;
+
 	}
 
 	return false;
