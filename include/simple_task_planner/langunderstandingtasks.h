@@ -38,8 +38,9 @@ class LangUnderstandingTasks
              * @param newCommand The command to store.
              * @param newParams The parameters to store.
              */
-            CommandFrame(std::string newCommand, 
-                    std::map<std::string, std::string> newParams) :
+            CommandFrame(std::string newCommand = "", 
+                    std::map<std::string, std::string> newParams = 
+                    std::map<std::string, std::string>()) :
                 command(newCommand), params(newParams) {}
         };
 
@@ -73,13 +74,13 @@ class LangUnderstandingTasks
                 CommandFrame &parseResult);
 
         /**
-         * @brief Indicates if a given sentence corresponds to a confirmation 
-         * (yes/no).
+         * @brief Indicates if a given sentence corresponds to a positive 
+         * confirmation (eg. robot yes).
          *
          * @param sentence The sentence to verify.
-         * @return True if the sentence correspond to a confirmation, False
-         * otherwise.
+         * @return True if the sentence correspond to a positive  confirmation,
+         * False otherwise.
          */
-        bool isUserConfirmation(std::string sentence);
+        bool isPositiveUserConfirmation(std::string sentence);
 };
 #endif

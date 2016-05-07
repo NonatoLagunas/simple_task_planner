@@ -6,6 +6,22 @@ LangUnderstandingTasks::LangUnderstandingTasks (
 {
 }
 
+bool LangUnderstandingTasks::isPositiveUserConfirmation(std::string sentence)
+{
+    CommandFrame parseResult;
+    parseSentence(sentence, parseResult);
+
+    if(parseResult.command.compare("CONFIRMATION") == 0)
+    {
+        if(parseResult.params["confirmation"].compare("yes")==0)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 bool LangUnderstandingTasks::parseSentence(std::string sentenceToParse, 
         CommandFrame &parseResult)
 {
