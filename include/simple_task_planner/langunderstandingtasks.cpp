@@ -6,6 +6,96 @@ LangUnderstandingTasks::LangUnderstandingTasks (
 {
 }
 
+bool LangUnderstandingTasks::isStartFollowInstruction(std::string sentence, 
+                std::string &goalToFollow)
+{
+    CommandFrame parseResult;
+    parseSentence(sentence, parseResult);
+
+    /**
+     * Verify if the sentence belongs to a switch command and if the asociated
+     * action and value is follow and start respectively.
+     */
+    if(parseResult.command.compare("SWITCH") != 0)
+    {
+        return false;
+    }
+
+    if((parseResult.params["action"].compare("follow") != 0 && 
+                parseResult.params["action"].compare("following") != 0) ||
+            parseResult.params["value"].compare("start") != 0)
+    {
+        return false;
+    }
+    
+    /**
+     * Store the goal parameter of the start follow instruction
+     */
+    goalToFollow = parseResult.params["goal"];
+
+    return true;
+}
+
+bool LangUnderstandingTasks::isStopFollowInstruction(std::string sentence, 
+                std::string &goalToUnfollow)
+{
+    CommandFrame parseResult;
+    parseSentence(sentence, parseResult);
+
+    /**
+     * Verify if the sentence belongs to a switch command and if the asociated
+     * action and value is follow and start respectively.
+     */
+    if(parseResult.command.compare("SWITCH") != 0)
+    {
+        return false;
+    }
+
+    if((parseResult.params["action"].compare("follow") != 0 && 
+                parseResult.params["action"].compare("following") != 0) ||
+            parseResult.params["value"].compare("stop") != 0)
+    {
+        return false;
+    }
+    
+    /**
+     * Store the goal parameter of the start follow instruction
+     */
+    goalToUnfollow = parseResult.params["goal"];
+
+    return true;
+
+}
+
+bool LangUnderstandingTasks::isFollowGoalInstruction(std::string sentence, 
+        std::string &goalToFollow)
+{
+    CommandFrame parseResult;
+    parseSentence(sentence, parseResult);
+
+    /**
+     * Verify if the sentence belongs to a motion instruction and if its path
+     * is follow
+     */
+    if(parseResult.command.compare("MOTION") != 0)
+    {
+        return false;
+    }
+
+    if(parseResult.params["path"].compare("follow") != 0 && 
+            parseResult.params["path"].compare("following") != 0)
+    {
+        return false;
+    }
+    
+    /**
+     * Store the goal parameter of the follow instruction
+     */
+    goalToFollow = parseResult.params["goal"];
+
+    return true;
+}
+
 bool LangUnderstandingTasks::isPositiveUserConfirmation(std::string sentence)
 {
     CommandFrame parseResult;
@@ -46,8 +136,10 @@ bool LangUnderstandingTasks::parseSentence(std::string sentenceToParse,
 		/**
          * Verify if the sentence was succesfully parsed
          */
-		if(srv.response.cfr.command.compare("NO_INTERPRETATION") != 0)
-			return true;
+		if(srv.response.cfr.command.compare("NO_INTERPRETATION") == 0)
+        {
+			return false;
+        }
 
         /**
          * To store the command an parameters resulting from the parsing.
@@ -69,6 +161,7 @@ bool LangUnderstandingTasks::parseSentence(std::string sentenceToParse,
         parseResult.command = resultCommand;
         parseResult.params = resultParams;
 
+        return true;
 	}
 
 	return false;

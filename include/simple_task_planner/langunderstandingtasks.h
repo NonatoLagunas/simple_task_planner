@@ -26,6 +26,8 @@ class LangUnderstandingTasks
          * to the sentence.
          * @var CommandFrame::params Contains the pair parameters-values of the
          * corresponding command.
+         * @var CommandFrame::CFiterator Iterator to find keys in the params
+         * map.
          */
         struct CommandFrame
         {
@@ -77,10 +79,56 @@ class LangUnderstandingTasks
          * @brief Indicates if a given sentence corresponds to a positive 
          * confirmation (eg. robot yes).
          *
-         * @param sentence The sentence to verify.
-         * @return True if the sentence correspond to a positive  confirmation,
+         * @param sentence The sentence to analyse.
+         * @return True if the sentence corresponds to a positive  confirmation,
          * False otherwise.
          */
         bool isPositiveUserConfirmation(std::string sentence);
+
+        /**
+         * @brief Indicates if a given sentence corresponds to a negative 
+         * confirmation (eg. robot no).
+         *
+         * @param sentence The sentence to analyse.
+         * @return True if the sentence corresponds to a negative confirmation,
+         * False otherwise.
+         */
+        bool isNegativeUserConfirmation(std::string sentence);
+
+        /**
+         * @brief Indicates if a given sentence corresponds to a follow goal  
+         * instruction.
+         *
+         * @param[in] sentence The sentence to analyse.
+         * @param[out] goalToFollow The goal to follow.
+         * @return True if the sentence corresponds to a follow goal
+         * instruction, False otherwise.
+         */
+        bool isFollowGoalInstruction(std::string sentence, 
+                std::string &goalToFollow);
+
+        /**
+         * @brief Indicates if a given sentence corresponds to a start switch 
+         * command of the follow goal instruction.
+         *
+         * @param[in] sentence The sentence to analyse.
+         * @param[out] goalToFollow The goal to follow.
+         * @return True if the sentence corresponds to a start switch command
+         * of the follow goal instruction, False otherwise.
+         */
+        bool isStartFollowInstruction(std::string sentence, 
+                std::string &goalToFollow);
+
+        /**
+         * @brief Indicates if a given sentence corresponds to a stop switch 
+         * command of the follow goal instruction.
+         *
+         * @param[in] sentence The sentence to analyse.
+         * @param[out] goalToUnfollow The goal to stop follow.
+         * @return True if the sentence corresponds to a stop switch command
+         * of the follow goal instruction, False otherwise.
+         */
+        bool isStopFollowInstruction(std::string sentence, 
+                std::string &goalToUnfollow);
 };
 #endif
