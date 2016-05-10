@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-include (${CMAKE_CURRENT_SOURCE_DIR}/dummy/DepCheck.cmake OPTIONAL)
+#include (${CMAKE_CURRENT_SOURCE_DIR}/dummy/DepCheck.cmake OPTIONAL)
 
 project(simple_task_planner)
 
@@ -13,8 +13,7 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
 
   #Package dependencies
-  bbros_bridge
-  hri_msgs
+  justina_tools
 )
 
 ## System dependencies are found with CMake's conventions
@@ -113,7 +112,7 @@ include_directories(
 catkin_package(
   INCLUDE_DIRS include
 #  LIBRARIES simple_task_planner
-#  CATKIN_DEPENDS roscpp rospy std_msgs
+  CATKIN_DEPENDS roscpp rospy std_msgs justina_tools
 #  DEPENDS system_lib
 )
 
@@ -126,7 +125,7 @@ catkin_package(
 
 # include_directories(include)
 file(GLOB_RECURSE headers "include/simple_task_planner/*.h*")
-file(GLOB_RECURSE sources "include/simple_task_planner/*.c*" "src/*.c*")
+file(GLOB_RECURSE sources "src/*.c*")
 #include_directories(
 #  ${catkin_INCLUDE_DIRS}
 #)
