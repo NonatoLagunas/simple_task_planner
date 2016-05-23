@@ -3,11 +3,7 @@
 #include "robot_service_manager/speechgeneratortasks.h"
 #include "robot_service_manager/headstatus.h"
 #include "simple_task_planner/simpletasks.h"
-#include "manip_msgs/InverseKinematicsFloatArray.h"
-#include "manip_msgs/InverseKinematicsPath.h"
-#include "manip_msgs/InverseKinematicsPose.h"
-#include "manip_msgs/DirectKinematics.h"
-#include "simple_task_planner/TaskAdvertiser.h"
+#include "simple_task_planner/taskadvertiser.h"
 #include "ros/ros.h"
 #include <iostream>
 #include <string>
