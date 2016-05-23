@@ -7,6 +7,7 @@
 #include "manip_msgs/InverseKinematicsPath.h"
 #include "manip_msgs/InverseKinematicsPose.h"
 #include "manip_msgs/DirectKinematics.h"
+#include "simple_task_planner/TaskAdvertiser.h"
 #include "ros/ros.h"
 #include <iostream>
 #include <string>
@@ -14,14 +15,28 @@
 int main(int argc, char** argv)
 {
     ros::init(argc, argv, "simple_task_planner");
-    ros::NodeHandle nodeHandler;
+    ros::NodeHandle nodeHandler("simple_task_planner");
+
+    TaskAdvertiser ta(nodeHandler);
+
+    ros::spin();
+    
     std::cout << "sub 1 " << std::endl;
     HeadStatus hdStatus(&nodeHandler);
     std::cout << "sub 2 " << std::endl;
     HeadStatus hdStatus2(&nodeHandler);
     SpeechGeneratorTasks spgExecuter;
     SimpleTasks st;
-    if(st.askAndWaitForConfirm("",10000))
+    std::string goalToFollow;
+    if(st.waitForStartFollowCommand("i am waiting for the start command", goalToFollow, 10000))
+    {
+        std::cout << "goal to follow: " << goalToFollow << std::endl;
+    }
+    else
+    {
+        std::cout << "no command received" << std::endl;
+    }
+    if(st.askAndWaitForConfirm("waiting for confirmation",10000))
     {
         std::cout << "robot yes received" << std::endl;
     }
