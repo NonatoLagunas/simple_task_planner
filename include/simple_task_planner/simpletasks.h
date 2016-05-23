@@ -53,16 +53,48 @@ class SimpleTasks
          *  2. For a period of time, the robot waits for the user's answer 
          *  (yes or not) and while the robot waits for the answer it will 
          *  repeat the question with certain frequency.
-         * @param questionToAsk The question that the robot will ask to the user.
-         * @param timeOut The amount of time (milliseconds) of the robot's 
+         *
+         * @param t_questionToAsk The question that the robot will ask to the 
+         * user.
+         * @param t_timeout The amount of time (milliseconds) of the robot's 
          * wait-for-answer. 
-         * @param repatTimeOut The amount of time (milliseconds) that the robot
-         * must wait before repeat the question to the user if this does not 
-         * respond.
+         * @param t_repatTimeout The amount of time (milliseconds) that the 
+         * robot must wait before repeat the question to the user if this does 
+         * not respond. If no time given, the question will be repeated every 
+         * 5000 millisecs.
          * @return True if the user answer with a positive confirmation to the 
          * robot's question. False otherwise.
          */
-        bool askAndWaitForConfirm(std::string questionToAsk, int timeOut,
-                int repeatTimeOut=5000);
+        bool askAndWaitForConfirm(std::string t_questionToAsk, int t_timeout,
+                int t_repeatTimeout=5000);
+
+        /**
+         * @brief Performs the simple task to wait for a start-follow voice 
+         * command comming from the user. 
+         *
+         * This task consist in the following steps:
+         *  1. For a period of time, the robot wait's for the user start follow
+         *  command (i.e. ~robot start follow me). 
+         *  While the robot waits for the command it can repeat a given 
+         *  sentence to the user (something like "i am waiting for the 
+         *  command").
+         *
+         * @param[in] t_sentenceToRepeat The sentence that the robot will speech
+         * to the user.
+         * @param[out] t_goalToFollow The goal that the robot must follow 
+         * (indicated by the user).
+         * @param[in] t_timeout The amount of time (milliseconds) that the robot
+         * will wait for the answer.
+         * @param[in] t_repeatTimeout The amount of time (milliseconds) that the
+         * robot will repeat the start sentence tot he user.
+         * @return True if the user gives a valid start command to the robot.
+         * False otherwise.
+         */
+        bool waitForStartFollowCommand(
+                std::string t_sentenceToRepeat,
+                std::string &t_goalToFollow,
+                int t_timeout, 
+                int t_repeatTimeout=5000
+                );
 };
 #endif

@@ -5,40 +5,81 @@ SimpleTasks::SimpleTasks()
 }
 
 bool SimpleTasks::askAndWaitForConfirm(std::string t_questionToAsk, 
-        int t_timeOut, int t_repeatTimeOut)
+        int t_timeout, int t_repeatTimeout)
 {
-    SpeechGeneratorTasks m_spgenTasks;
-    LangUnderstandingTasks m_langundTasks;
-
-    m_sprec.startListening();
-    //Loop to wait for the user's response until the timeout reached.
     using namespace boost::chrono;
-    steady_clock::time_point taskStartTime = steady_clock::now();
+
+    //start to listen voic commands
+    m_sprec.startListening();
+
+    //Loop to wait for the user's response until timeout
     milliseconds millisElapsed;
-    while(ros::ok() && millisElapsed.count() < t_timeOut
+    steady_clock::time_point taskStartTime = steady_clock::now();
+
+    while(ros::ok() && millisElapsed.count() < t_timeout
             && !m_sprec.isSentenceRecognized())
     {
         //Repeat the the question to the user again every t_repeatTimeOut time.
-        if(millisElapsed.count()%t_repeatTimeOut == 0)
+        if(millisElapsed.count()%t_repeatTimeout == 0)
         {
-    		 // Ask the question to the user.
     		m_spgenTasks.asyncSpeech(t_questionToAsk);
         }
-        steady_clock::time_point taskCurrentTime = steady_clock::now();
         millisElapsed = duration_cast<milliseconds>(
-                taskCurrentTime - taskStartTime
+                steady_clock::now() - taskStartTime
                 );
-        ros::spinOnce();
 
+        ros::spinOnce();
     }
+    //disable the speech recognition listen mode
     m_sprec.stopListening();
 
     //verify if the time out was reached
-    if(millisElapsed.count()>=t_timeOut || !ros::ok())
+    if(millisElapsed.count()>=t_timeout || !ros::ok())
     {
         return false;
     }
     //parse the recognized sentence
     return m_langundTasks.isPositiveUserConfirmation(
             m_sprec.getLastRecognizedSentence());
+}
+
+bool SimpleTasks::waitForStartFollowCommand(std::string t_sentenceToRepeat, 
+        std::string &t_goalToFollow, int t_timeout, int t_repeatTimeout)
+{
+    using namespace boost::chrono;
+    m_sprec.startListening();
+    
+    //Loop to wait for the user's start command
+    milliseconds millisElapsed;
+    steady_clock::time_point taskStartTime = steady_clock::now();
+    while(ros::ok() && millisElapsed.count() < t_timeout)
+    {
+        //sentence heard
+        if(m_sprec.isSentenceRecognized())
+        {
+            if(m_langundTasks.isStartFollowInstruction(
+                        m_sprec.getLastRecognizedSentence(), t_goalToFollow))
+            {
+                return true;
+            }
+            m_sprec.stopListening();
+            m_sprec.startListening();
+        }
+        
+        //Repeat the the question to the user again every t_repeatTimeOut time.
+        if(millisElapsed.count()%t_repeatTimeout == 0)
+        {
+    		m_spgenTasks.asyncSpeech(t_sentenceToRepeat);
+        }
+        millisElapsed = duration_cast<milliseconds>(
+                steady_clock::now() - taskStartTime
+                );
+
+        ros::spinOnce();
+    }
+
+    m_sprec.stopListening();
+    t_goalToFollow = "";
+
+    return false;
 }
