@@ -17,11 +17,12 @@
 #ifndef _JUSTINA_SIMPLETASKS_H
 #define _JUSTINA_SIMPLETASKS_H
 #include <string>
-#include <chrono>
+#include <boost/chrono.hpp>
 #include <iostream>
 #include "ros/ros.h"
-#include "justina_tools/speechgeneratortasks.h"
-#include "justina_tools/langunderstandingtasks.h"
+#include "robot_service_manager/speechgeneratortasks.h"
+#include "robot_service_manager/speechrecognitionstatus.h"
+#include "robot_service_manager/langunderstandingtasks.h"
 
 class SimpleTasks
 {
@@ -31,6 +32,10 @@ class SimpleTasks
 
         LangUnderstandingTasks m_langundTasks; /**< Object to perform language 
                                                  understading tasks. */
+
+		SpeechRecognitionStatus m_sprec; /**< Object to know the sprec status.
+                                           */
+
     public:
         /**
          * @brief Class constructor.

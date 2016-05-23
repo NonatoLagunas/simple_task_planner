@@ -13,15 +13,19 @@ find_package(catkin REQUIRED COMPONENTS
   message_generation
 
   #Package dependencies
-  justina_tools
+  robot_service_manager
 )
-
+find_package(Boost REQUIRED COMPONENTS
+    thread
+    chrono
+    )
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
 include_directories(
     include
     ${catkin_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
 )
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -112,8 +116,8 @@ include_directories(
 catkin_package(
   INCLUDE_DIRS include
 #  LIBRARIES simple_task_planner
-  CATKIN_DEPENDS roscpp rospy std_msgs justina_tools
-#  DEPENDS system_lib
+  CATKIN_DEPENDS roscpp rospy std_msgs robot_service_manager
+  DEPENDS Boost
 )
 
 ###########
@@ -155,6 +159,7 @@ add_executable(simple_task_planner_node ${sources} ${headers})
  target_link_libraries(
     simple_task_planner_node
    ${catkin_LIBRARIES}
+   ${Boost_LIBRARIES}
  )
 
 #############

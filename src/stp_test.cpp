@@ -1,8 +1,12 @@
-#include "justina_tools/speechrecognitionstatus.h"
-#include "justina_tools/langunderstandingtasks.h"
-#include "justina_tools/speechgeneratortasks.h"
-#include "justina_tools/headstatus.h"
-#include "simple_task_planner/simple_tasks.h"
+#include "robot_service_manager/speechrecognitionstatus.h"
+#include "robot_service_manager/langunderstandingtasks.h"
+#include "robot_service_manager/speechgeneratortasks.h"
+#include "robot_service_manager/headstatus.h"
+#include "simple_task_planner/simpletasks.h"
+#include "manip_msgs/InverseKinematicsFloatArray.h"
+#include "manip_msgs/InverseKinematicsPath.h"
+#include "manip_msgs/InverseKinematicsPose.h"
+#include "manip_msgs/DirectKinematics.h"
 #include "ros/ros.h"
 #include <iostream>
 #include <string>
@@ -12,13 +16,19 @@ int main(int argc, char** argv)
     ros::init(argc, argv, "simple_task_planner");
     ros::NodeHandle nodeHandler;
     std::cout << "sub 1 " << std::endl;
-    HeadStatus hdStatus(nodeHandler);
+    HeadStatus hdStatus(&nodeHandler);
     std::cout << "sub 2 " << std::endl;
-    HeadStatus hdStatus2(nodeHandler);
-    SpeechRecognitionStatus spStatus(&nodeHandler);
+    HeadStatus hdStatus2(&nodeHandler);
     SpeechGeneratorTasks spgExecuter;
     SimpleTasks st;
-    st.askAndWaitForConfirm("",10000, 15000);
+    if(st.askAndWaitForConfirm("",10000))
+    {
+        std::cout << "robot yes received" << std::endl;
+    }
+    else
+    {
+        std::cout << "no confirmation" << std::endl;
+    }
     //st.askAndWaitForConfirm("",10000,5000);
 
     LangUnderstandingTasks lang;
@@ -55,4 +65,7 @@ int main(int argc, char** argv)
     //ros::spin();
 
     //spgExecuter.asyncSpeech("async test");
+    
+    //create a ros topic for each stp task
+
 }
