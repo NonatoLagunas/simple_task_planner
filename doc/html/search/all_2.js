@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['getheadpan',['getHeadPan',['../class_head_status.html#a06c359a7b1ed7a594a0b34912af1a030',1,'HeadStatus']]],
-  ['getheadpose',['getHeadPose',['../class_head_status.html#a45af631cd9ae427d7ba3f99e83069e14',1,'HeadStatus']]],
-  ['getheadtilt',['getHeadTilt',['../class_head_status.html#a514dc6720510539a3dd7d686a1b200bf',1,'HeadStatus']]]
+  ['simpletasks',['SimpleTasks',['../class_simple_tasks.html',1,'SimpleTasks'],['../class_simple_tasks.html#a2c01b91079593cf7be1a217d35326afb',1,'SimpleTasks::SimpleTasks()']]],
+  ['startadvertising',['startAdvertising',['../class_task_advertiser.html#a23ee8ef6b343f52cd7b5d7d0dcbd6fe1',1,'TaskAdvertiser']]]
 ];

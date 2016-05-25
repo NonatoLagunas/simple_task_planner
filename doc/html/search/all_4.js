@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['langunderstandingtasks',['LangUnderstandingTasks',['../class_lang_understanding_tasks.html',1,'LangUnderstandingTasks'],['../class_lang_understanding_tasks.html#ab62c51df68d09c726595e8053b866b1e',1,'LangUnderstandingTasks::LangUnderstandingTasks()']]]
+  ['waitforcommand',['waitForCommand',['../class_simple_tasks.html#ae9e4541c3e71d536b21e24c81f216235',1,'SimpleTasks']]],
+  ['waitforstartfollowcommand',['waitForStartFollowCommand',['../class_simple_tasks.html#af7a9088f0d7c9158b90e7c6c7bc57f93',1,'SimpleTasks']]]
 ];

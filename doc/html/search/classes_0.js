@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['headstatus',['HeadStatus',['../class_head_status.html',1,'']]]
+  ['simpletasks',['SimpleTasks',['../class_simple_tasks.html',1,'']]]
 ];

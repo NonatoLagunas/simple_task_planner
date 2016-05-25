@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['langunderstandingtasks',['LangUnderstandingTasks',['../class_lang_understanding_tasks.html',1,'']]]
+  ['taskadvertiser',['TaskAdvertiser',['../class_task_advertiser.html',1,'']]]
 ];
