@@ -17,6 +17,17 @@ void TaskAdvertiser::startAdvertising()
 
     m_waitStartFollowSrv = m_nh.advertiseService("wait_for_start_follow", 
             &TaskAdvertiser::waitStartFollowCallback, this);
+
+    m_waitForCommandSrv = m_nh.advertiseService("wait_for_command", 
+            &TaskAdvertiser::waitForCommandCallback, this);
+}
+
+bool TaskAdvertiser::waitForCommandCallback(
+        planning_msgs::wait_for_command::Request &req,
+        planning_msgs::wait_for_command::Response &resp
+        )
+{
+    return true;
 }
 
 bool TaskAdvertiser::askAndWaitForConfirmCallback( 
@@ -24,12 +35,10 @@ bool TaskAdvertiser::askAndWaitForConfirmCallback(
         planning_msgs::wait_for_confirm::Response &resp
         )
 {
-    resp.confirmation_received = m_simpleTasks.askAndWaitForConfirm(
+    return resp.confirmation_received = m_simpleTasks.askAndWaitForConfirm(
             req.repeat_sentence.sentence, req.timeout, 
             req.repeat_sentence.repeat_time
             );
-
-    return true;
 }
 
 bool TaskAdvertiser::waitStartFollowCallback( 
@@ -38,10 +47,8 @@ bool TaskAdvertiser::waitStartFollowCallback(
         )
 {
 
-    resp.confirmation_received = m_simpleTasks.waitForStartFollowCommand(
+    return resp.confirmation_received = m_simpleTasks.waitForStartFollowCommand(
             req.repeat_sentence.sentence, resp.goal_to_follow, req.timeout, 
             req.repeat_sentence.repeat_time
             );
-
-    return true;
 }

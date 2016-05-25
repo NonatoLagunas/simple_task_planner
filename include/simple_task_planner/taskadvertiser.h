@@ -15,6 +15,7 @@
 #include "simple_task_planner/simpletasks.h"
 #include "planning_msgs/wait_for_confirm.h"
 #include "planning_msgs/wait_for_start_follow.h"
+#include "planning_msgs/wait_for_command.h"
 #include "ros/ros.h"
 
 class TaskAdvertiser
@@ -36,6 +37,10 @@ class TaskAdvertiser
                                                    the wait for start follow 
                                                    task as a service. */
 
+        ros::ServiceServer m_waitForCommandSrv; /**< ROS object to advertise 
+                                                   the wait for command 
+                                                   task as a service. */
+
         bool askAndWaitForConfirmCallback(
                 planning_msgs::wait_for_confirm::Request &req,
                 planning_msgs::wait_for_confirm::Response &resp
@@ -44,6 +49,11 @@ class TaskAdvertiser
         bool waitStartFollowCallback(
                 planning_msgs::wait_for_start_follow::Request &req,
                 planning_msgs::wait_for_start_follow::Response &resp
+                );
+
+        bool waitForCommandCallback(
+                planning_msgs::wait_for_command::Request &req,
+                planning_msgs::wait_for_command::Response &resp
                 );
     public:
 
