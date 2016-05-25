@@ -14,6 +14,17 @@ int main(int argc, char** argv)
     ros::NodeHandle nodeHandler("simple_task_planner");
 
     TaskAdvertiser ta(nodeHandler);
+    SimpleTasks st;
+    std::string command;
+    std::map<std::string, std::string> par;
+    if(st.waitForCommand(command, par, 10000))
+    {
+        std::cout << "command " << command << std::endl;
+    }
+    else
+    {
+        std::cout << "nothing" << std::endl;
+    }
 
     ros::spin();
     
@@ -22,7 +33,6 @@ int main(int argc, char** argv)
     std::cout << "sub 2 " << std::endl;
     HeadStatus hdStatus2(&nodeHandler);
     SpeechGeneratorTasks spgExecuter;
-    SimpleTasks st;
     std::string goalToFollow;
     if(st.waitForStartFollowCommand("i am waiting for the start command", goalToFollow, 10000))
     {
