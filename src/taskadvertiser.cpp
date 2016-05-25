@@ -27,6 +27,19 @@ bool TaskAdvertiser::waitForCommandCallback(
         planning_msgs::wait_for_command::Response &resp
         )
 {
+    std::map<std::string, std::string> params;
+    resp.command_received = m_simpleTasks.waitForCommand(resp.cfr.command, 
+            params, req.timeout);
+
+    planning_msgs::CFRParams currentParam;
+    std::map<std::string, std::string>::iterator it;
+    for(it=params.begin(); it != params.end(); ++it)
+    {
+        currentParam.frame_id = it->first;
+        currentParam.frame_value = it->second;
+        resp.cfr.params.push_back(currentParam);
+    }
+
     return true;
 }
 
@@ -35,10 +48,12 @@ bool TaskAdvertiser::askAndWaitForConfirmCallback(
         planning_msgs::wait_for_confirm::Response &resp
         )
 {
-    return resp.confirmation_received = m_simpleTasks.askAndWaitForConfirm(
+    resp.confirmation_received = m_simpleTasks.askAndWaitForConfirm(
             req.repeat_sentence.sentence, req.timeout, 
             req.repeat_sentence.repeat_time
             );
+
+    return true;
 }
 
 bool TaskAdvertiser::waitStartFollowCallback( 
@@ -47,8 +62,10 @@ bool TaskAdvertiser::waitStartFollowCallback(
         )
 {
 
-    return resp.confirmation_received = m_simpleTasks.waitForStartFollowCommand(
+    resp.command_received = m_simpleTasks.waitForStartFollowCommand(
             req.repeat_sentence.sentence, resp.goal_to_follow, req.timeout, 
             req.repeat_sentence.repeat_time
             );
+
+    return true;
 }

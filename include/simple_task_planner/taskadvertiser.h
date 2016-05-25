@@ -16,6 +16,7 @@
 #include "planning_msgs/wait_for_confirm.h"
 #include "planning_msgs/wait_for_start_follow.h"
 #include "planning_msgs/wait_for_command.h"
+#include "planning_msgs/CFRParams.h"
 #include "ros/ros.h"
 
 class TaskAdvertiser
