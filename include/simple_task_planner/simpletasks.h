@@ -19,10 +19,15 @@
 #include <string>
 #include <boost/chrono.hpp>
 #include <iostream>
+#include <map>
+#include <vector>
+#include <utility>
 #include "ros/ros.h"
 #include "robot_service_manager/speechgeneratortasks.h"
 #include "robot_service_manager/speechrecognitionstatus.h"
 #include "robot_service_manager/langunderstandingtasks.h"
+#include "robot_service_manager/headstatus.h"
+#include "robot_service_manager/facerecognitiontasks.h"
 
 class SimpleTasks
 {
@@ -36,6 +41,20 @@ class SimpleTasks
 		SpeechRecognitionStatus m_sprec; /**< Object to know the sprec status.
                                            */
 
+        FaceRecognitionTasks m_recoFaces; /**< Object to prform face 
+                                            recognition tasks. */
+
+        HeadStatus m_headStatus; /**< Object to perform head movements. */
+
+        /**
+         * @brief Initiaizes a vector that stores head movements to its default
+         * value.
+         *
+         * @param t_vector The vector to initialize.
+         */
+        void initializeHeadVector(
+                std::vector<std::pair<float, float> > &t_vector
+                );
     public:
         /**
          * @brief Class constructor.
@@ -95,6 +114,60 @@ class SimpleTasks
                 std::string &t_goalToFollow,
                 int t_timeout, 
                 int t_repeatTimeout=5000
+                );
+
+        /**
+         * @brief Perform the task of wait for a valid voice command comming 
+         * from the user.
+         *
+         * This task consist in the following steps:
+         *  1. For a period of time, the robot wait's for a user voice command.
+         *  2. When the robot hears a command, it try to parse it.
+         *  3. If the parse is valid then, the command and the params are 
+         *  returned. If not, back to the step 1.
+         *
+         *  @param[out] t_command The resulted parsed command. If no valid 
+         *  command is given during the valid period of time, the returned 
+         *  value will be an empty string.
+         *  @param[out] t_params The resulted params of the parsed command.
+         *  @param[in] t_timeout The amount of time (milliseconds) that the 
+         *  robot will wait for a command.
+         */
+        bool waitForCommand(std::string &t_command,
+                std::map<std::string, std::string> &t_params, int t_timeout);
+
+        /**
+         * @brief Perform the task of remeber a person's face.
+         *
+         * This tasks consists in the following steps:
+         *  1. There is a person in front of the robot (looking, or not, at the
+         *      robot's camera).
+         *  2. The robot start to instruct to the operator.
+         *  3. After the instruction, the robot starts to search for a human 
+         *      face in front of it.
+         *  4. If the robot does not find a face, it starts to move the head in
+         *      different positions and tries to find a fece again.
+         *  5. When the robot finds a face, it starts to training the face, at
+         *      the end of this step the robot announce tht the training is 
+         *      finished.
+         *
+         * @param t_findInstructions The robot instructions for the human, 
+         * during the find face phase. To speech the default instructions a 
+         * parameter value of "default" must be passed.
+         * @param t_faceName The name to assign to the remebered human.
+         * @param t_headMovements The head movements to perform during the find
+         * search phase. To perform a default movements set, an empty list must
+         * be passed as parameter. The head movements consist of a vector of 
+         * float pairs in which each pair indicates the headPan and headTilt
+         * respectively.
+         * @return True if the human face was found and remember succesfully. 
+         * False otherwise.
+         */
+        bool faceSearchAndRemeber(
+                std::string t_findInstructions,
+                std::string t_faceName, 
+                std::vector<std::pair<float, float> > t_headMovements =
+                    std::vector<std::pair<float, float> >()
                 );
 };
 #endif

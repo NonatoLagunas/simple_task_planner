@@ -60,6 +60,7 @@ bool SimpleTasks::waitForStartFollowCommand(std::string t_sentenceToRepeat,
             if(m_langundTasks.isStartFollowInstruction(
                         m_sprec.getLastRecognizedSentence(), t_goalToFollow))
             {
+                m_sprec.stopListening();
                 return true;
             }
             m_sprec.stopListening();
@@ -80,6 +81,48 @@ bool SimpleTasks::waitForStartFollowCommand(std::string t_sentenceToRepeat,
 
     m_sprec.stopListening();
     t_goalToFollow = "";
+
+    return false;
+}
+
+bool SimpleTasks::waitForCommand(
+        std::string &t_command,
+        std::map<std::string, std::string> &t_params, 
+        int t_timeout
+        )
+{
+    using namespace boost::chrono;
+    m_sprec.startListening();
+    
+    //Loop to wait for the user's start command
+    milliseconds millisElapsed;
+    steady_clock::time_point taskStartTime = steady_clock::now();
+    while(ros::ok() && millisElapsed.count() < t_timeout)
+    {
+        //sentence heard
+        if(m_sprec.isSentenceRecognized())
+        {
+            if(m_langundTasks.isValidCommand(
+                        m_sprec.getLastRecognizedSentence(),
+                        t_command,
+                        t_params))
+            {
+                m_sprec.stopListening();
+                return true;
+            }
+            m_sprec.stopListening();
+            m_sprec.startListening();
+        }
+        
+        millisElapsed = duration_cast<milliseconds>(
+                steady_clock::now() - taskStartTime
+                );
+
+        ros::spinOnce();
+    }
+
+    m_sprec.stopListening();
+    t_command = "";
 
     return false;
 }
