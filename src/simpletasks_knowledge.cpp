@@ -2,7 +2,7 @@
 
 
 bool SimpleTasks::faceSearchAndRemeber(std::string t_findInstructions, 
-        std::string t_faceName, 
+        std::string t_faceID, 
         std::vector<std::pair<float, float> > t_headMovements)
 {
     using namespace std;
@@ -30,24 +30,21 @@ bool SimpleTasks::faceSearchAndRemeber(std::string t_findInstructions,
                 t_headMovements[currentHeadPos].first,
                 t_headMovements[currentHeadPos].second
                 );
-        ros::spinOnce();
         
-        //wait for the head to reach the position 
+        //wait for the head to reach the position (just a timer not a topic 
+        //update)
         headWaitDuration.sleep();
 
-        //Try to detect train the face on the current head position
-        //if(faceTrained = m_recoFaces.train(t_faceName, 10))
-        //{
-        //m_spenTasks.syncSpeech("human, smile", 5000);
-        //m_recoFaces.train(t_faceName, 10))
-        //ros::SpinOnce();
-        //m_spenTasks.syncSpeech("now, a serious face", 5000);
-        //m_recoFaces.train(t_faceName, 10))
-        //ros::SpinOnce();
-        //m_spenTasks.syncSpeech("i have remembered your face", 5000);
-        //}
-        //ros::SpinOnce();
-        //if(m_recoFaces.trainFace()) break;
+        //Try to train the face on the current head position
+        if((faceTrained = m_recoFaces.trainFace(t_faceID, 3000)))
+        {
+            m_spgenTasks.syncSpeech("human, smile", 5000);
+            m_recoFaces.trainFace(t_faceID, 3000);
+            m_spgenTasks.syncSpeech("now, a serious face", 5000);
+            m_recoFaces.trainFace(t_faceID, 3000);
+            m_spgenTasks.syncSpeech("I have remembered your face", 5000);
+        }
+        ros::spinOnce();
     }
     
     return faceTrained;
