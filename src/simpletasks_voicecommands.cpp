@@ -85,6 +85,48 @@ bool SimpleTasks::waitForStartFollowCommand(std::string t_sentenceToRepeat,
     return false;
 }
 
+bool SimpleTasks::waitForStartGuideCommand(std::string t_sentenceToRepeat, 
+        std::string &t_goalToGuide, int t_timeout, int t_repeatTimeout)
+{
+    using namespace boost::chrono;
+    m_sprec.startListening();
+    
+    //Loop to wait for the user's start command
+    milliseconds millisElapsed;
+    steady_clock::time_point taskStartTime = steady_clock::now();
+    while(ros::ok() && millisElapsed.count() < t_timeout)
+    {
+        //sentence heard
+        if(m_sprec.isSentenceRecognized())
+        {
+            if(m_langundTasks.isStartGuideInstruction(
+                        m_sprec.getLastRecognizedSentence(), t_goalToGuide))
+            {
+                m_sprec.stopListening();
+                return true;
+            }
+            m_sprec.stopListening();
+            m_sprec.startListening();
+        }
+        
+        //Repeat the the question to the user again every t_repeatTimeOut time.
+        if(millisElapsed.count()%t_repeatTimeout == 0)
+        {
+    		m_spgenTasks.asyncSpeech(t_sentenceToRepeat);
+        }
+        millisElapsed = duration_cast<milliseconds>(
+                steady_clock::now() - taskStartTime
+                );
+
+        ros::spinOnce();
+    }
+
+    m_sprec.stopListening();
+    t_goalToGuide = "";
+
+    return false;
+}
+
 bool SimpleTasks::waitForCommand(
         std::string &t_command,
         std::map<std::string, std::string> &t_params, 

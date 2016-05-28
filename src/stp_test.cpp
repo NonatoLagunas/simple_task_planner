@@ -17,16 +17,16 @@ int main(int argc, char** argv)
     SimpleTasks st;
     std::string command;
     std::map<std::string, std::string> par;
-    if(st.waitForCommand(command, par, 10000))
-    {
-        std::cout << "command " << command << std::endl;
-    }
-    else
-    {
-        std::cout << "nothing" << std::endl;
-    }
+    //if(st.waitForCommand(command, par, 10000))
+    //{
+    //    std::cout << "command " << command << std::endl;
+    //}
+    //else
+    //{
+    //    std::cout << "nothing" << std::endl;
+    //}
 
-    ros::spin();
+    //ros::spin();
     
     std::cout << "sub 1 " << std::endl;
     HeadStatus hdStatus(&nodeHandler);
@@ -34,22 +34,22 @@ int main(int argc, char** argv)
     HeadStatus hdStatus2(&nodeHandler);
     SpeechGeneratorTasks spgExecuter;
     std::string goalToFollow;
-    if(st.waitForStartFollowCommand("i am waiting for the start command", goalToFollow, 10000))
-    {
-        std::cout << "goal to follow: " << goalToFollow << std::endl;
-    }
-    else
-    {
-        std::cout << "no command received" << std::endl;
-    }
-    if(st.askAndWaitForConfirm("waiting for confirmation",10000))
-    {
-        std::cout << "robot yes received" << std::endl;
-    }
-    else
-    {
-        std::cout << "no confirmation" << std::endl;
-    }
+    //if(st.waitForStartFollowCommand("i am waiting for the start command", goalToFollow, 10000))
+    //{
+    //    std::cout << "goal to follow: " << goalToFollow << std::endl;
+    //}
+    //else
+    //{
+    //    std::cout << "no command received" << std::endl;
+    //}
+    //if(st.askAndWaitForConfirm("waiting for confirmation",10000))
+    //{
+    //    std::cout << "robot yes received" << std::endl;
+    //}
+    //else
+    //{
+    //    std::cout << "no confirmation" << std::endl;
+    //}
     //st.askAndWaitForConfirm("",10000,5000);
 
     LangUnderstandingTasks lang;

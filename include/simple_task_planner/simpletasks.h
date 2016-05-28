@@ -117,6 +117,35 @@ class SimpleTasks
                 );
 
         /**
+         * @brief Performs the simple task to wait for a start-guiding voice 
+         * command comming from the user. 
+         *
+         * This task consist in the following steps:
+         *  1. For a period of time, the robot wait's for the user start guide
+         *  command (i.e. ~robot start guiding me). 
+         *  While the robot waits for the command it can repeat a given 
+         *  sentence to the user (something like "i am waiting for the 
+         *  command").
+         *
+         * @param[in] t_sentenceToRepeat The sentence that the robot will speech
+         * to the user.
+         * @param[out] t_goalToGuide The goal that the robot must guide 
+         * (indicated by the voice command).
+         * @param[in] t_timeout The amount of time (milliseconds) that the robot
+         * will wait for the command.
+         * @param[in] t_repeatTimeout The amount of time (milliseconds) that the
+         * robot will repeat the start sentence tot he user.
+         * @return True if the user gives a valid guide command to the robot.
+         * False otherwise.
+         */
+        bool waitForStartGuideCommand(
+                std::string t_sentenceToRepeat,
+                std::string &t_goalToGuide,
+                int t_timeout, 
+                int t_repeatTimeout=5000
+                );
+
+        /**
          * @brief Perform the task of wait for a valid voice command comming 
          * from the user.
          *
