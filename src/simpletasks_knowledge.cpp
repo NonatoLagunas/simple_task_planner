@@ -1,6 +1,5 @@
 #include "simple_task_planner/simpletasks.h"
 
-
 bool SimpleTasks::faceSearchAndRemeber(std::string t_findInstructions, 
         std::string t_faceID, 
         std::vector<std::pair<float, float> > t_headMovements)
