@@ -44,11 +44,13 @@
   <build_depend>rospy</build_depend>
   <build_depend>std_msgs</build_depend>
   <build_depend>robot_service_manager</build_depend>
+  <build_depend>planning_msgs</build_depend>
   <build_depend>Boost</build_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
   <run_depend>std_msgs</run_depend>
   <run_depend>robot_service_manager</run_depend>
+  <run_depend>planning_msgs</run_depend>
   <run_depend>Boost</run_depend>
 
 
