@@ -23,6 +23,9 @@ void TaskAdvertiser::startAdvertising()
 
     m_waitForCommandSrv = m_nh.advertiseService("wait_for_command", 
             &TaskAdvertiser::waitForCommandCallback, this);
+
+    m_waitForStartGuideSrv = m_nh.advertiseService("wait_for_start_guide", 
+            &TaskAdvertiser::waitForStartGuideCallback, this);
 }
 
 bool TaskAdvertiser::rememberFaceCallback( 
@@ -81,14 +84,26 @@ bool TaskAdvertiser::askAndWaitForConfirmCallback(
     return true;
 }
 
+bool TaskAdvertiser::waitForStartGuideCallback(
+        planning_msgs::wait_for_switch::Request &req,
+        planning_msgs::wait_for_switch::Response &resp
+        )
+{
+    resp.command_received = m_simpleTasks.waitForStartGuideCommand(
+            req.repeat_sentence.sentence, resp.goal, req.timeout, 
+            req.repeat_sentence.repeat_time
+            );
+
+    return true;
+}
 bool TaskAdvertiser::waitStartFollowCallback( 
-        planning_msgs::wait_for_start_follow::Request &req,
-        planning_msgs::wait_for_start_follow::Response &resp
+        planning_msgs::wait_for_switch::Request &req,
+        planning_msgs::wait_for_switch::Response &resp
         )
 {
 
     resp.command_received = m_simpleTasks.waitForStartFollowCommand(
-            req.repeat_sentence.sentence, resp.goal_to_follow, req.timeout, 
+            req.repeat_sentence.sentence, resp.goal, req.timeout, 
             req.repeat_sentence.repeat_time
             );
 

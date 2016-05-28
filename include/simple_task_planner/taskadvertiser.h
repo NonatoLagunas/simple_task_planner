@@ -16,7 +16,7 @@
 #include <utility>
 #include "simple_task_planner/simpletasks.h"
 #include "planning_msgs/wait_for_confirm.h"
-#include "planning_msgs/wait_for_start_follow.h"
+#include "planning_msgs/wait_for_switch.h"
 #include "planning_msgs/wait_for_command.h"
 #include "planning_msgs/search_remember_face.h"
 #include "planning_msgs/CFRParams.h"
@@ -28,7 +28,7 @@ class TaskAdvertiser
 
         ros::NodeHandle m_nh; /**< ROS node handler. */
         
-        bool m_isAdvertising; /**< Indicates if the tasks are advertised. **/
+        bool m_isAdvertising; /**< Indicates if the tasks are advertised. */
 
         SimpleTasks m_simpleTasks; /**< To call the simple tasks. */
 
@@ -48,6 +48,11 @@ class TaskAdvertiser
         ros::ServiceServer m_rememberFaceSrv; /**< ROS object to advertise 
                                                 the search and remember face 
                                                 task as a service. */
+
+        ros::ServiceServer m_waitForStartGuideSrv; /**< ROS object to advertise 
+                                                     the wait for star guide 
+                                                     command task as a service.
+                                                     */
 
         /**
          * @brief Callback for the Search and Remember Face service.
@@ -84,20 +89,37 @@ class TaskAdvertiser
                 );
 
         /**
+         * @brief Callback for the Wait For Start Guide service. 
+         *
+         * For more information about this task (the execution sequence and the
+         * parameters) you must take a look at the documentation of the 
+         * SimpleTasks::waitForStartGuideCommand method and to the 
+         * **wait_for_switch.srv** of the planning_msgs package.
+         *
+         * To perform this task on your node, you must make a call to the 
+         * **wait_for_start_guide** service of the simple_task_planner node (be 
+         * careful of the namespace!!!!).
+         */
+        bool waitForStartGuideCallback(
+                planning_msgs::wait_for_switch::Request &req,
+                planning_msgs::wait_for_switch::Response &resp
+                );
+
+        /**
          * @brief Callback for the Wait For Start Follow service. 
          *
          * For more information about this task (the execution sequence and the
          * parameters) you must take a look at the documentation of the 
          * SimpleTasks::waitForStartFollowCommand method and to the 
-         * **wait_for_start_follow.srv** of the planning_msgs package.
+         * **wait_for_switch.srv** of the planning_msgs package.
          *
          * To perform this task on your node, you must make a call to the 
          * **wait_for_start_follow** service of the simple_task_planner node (be 
          * careful of the namespace!!!!).
          */
         bool waitStartFollowCallback(
-                planning_msgs::wait_for_start_follow::Request &req,
-                planning_msgs::wait_for_start_follow::Response &resp
+                planning_msgs::wait_for_switch::Request &req,
+                planning_msgs::wait_for_switch::Response &resp
                 );
 
         /**
