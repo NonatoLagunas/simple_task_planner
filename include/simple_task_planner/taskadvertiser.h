@@ -19,6 +19,7 @@
 #include "planning_msgs/wait_for_switch.h"
 #include "planning_msgs/wait_for_command.h"
 #include "planning_msgs/search_remember_face.h"
+#include "planning_msgs/ask_store_name.h"
 #include "planning_msgs/CFRParams.h"
 #include "ros/ros.h"
 
@@ -53,6 +54,27 @@ class TaskAdvertiser
                                                      the wait for star guide 
                                                      command task as a service.
                                                      */
+
+        ros::ServiceServer m_askForNameSrv; /**< ROS object to advertise 
+                                              the ask and store name task 
+                                              as a service. */
+
+        /**
+         * @brief Callback for the Ask and Store Name service.
+         *
+         * For more information about this task (the execution sequence and the
+         * parameters) you must take a look at the documentation of the 
+         * SimpleTasks::askForName method and to the 
+         * **ask_store_name.srv** of the planning_msgs package.
+         *
+         * To perform this task on your node, you must make a call to the 
+         * **ask_store_name** service of the simple_task_planner node 
+         * (be careful of the namespace!!!!).
+         */
+        bool askForNameCallback(
+                planning_msgs::ask_store_name::Request &req,
+                planning_msgs::ask_store_name::Response &resp
+                );
 
         /**
          * @brief Callback for the Search and Remember Face service.

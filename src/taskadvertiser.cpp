@@ -26,6 +26,23 @@ void TaskAdvertiser::startAdvertising()
 
     m_waitForStartGuideSrv = m_nh.advertiseService("wait_for_start_guide", 
             &TaskAdvertiser::waitForStartGuideCallback, this);
+
+    m_askForNameSrv = m_nh.advertiseService("ask_store_name", 
+            &TaskAdvertiser::askForNameCallback, this);
+
+}
+
+bool TaskAdvertiser::askForNameCallback(
+        planning_msgs::ask_store_name::Request &req,
+        planning_msgs::ask_store_name::Response &resp
+        )
+{
+    resp.success = askForName(resp.stored_name, 
+            (req.attempt_timeout > 0) ? req.attempt_timeout : 30000,
+            (req.repeat_timeout > 0 ) ? req.repeat_timeout : 10000, 
+            (req.max_attempts > 0) ? req.max_attempts : 3);
+
+    return true;
 }
 
 bool TaskAdvertiser::rememberFaceCallback( 
