@@ -49,21 +49,68 @@ class TaskAdvertiser
                                                 the search and remember face 
                                                 task as a service. */
 
+        /**
+         * @brief Callback for the Search and Remember Face service.
+         *
+         * For more information about this task (the execution sequence and the
+         * parameters) you must take a look at the documentation of the 
+         * SimpleTasks::faceSearchAndRemeber method and to the 
+         * **search_remember_face.srv** of the planning_msgs package.
+         *
+         * To perform this task on your node, you must make a call to the 
+         * **search_and_remember_face** service of the simple_task_planner node 
+         * (be careful of the namespace!!!!).
+         */
         bool rememberFaceCallback(
                 planning_msgs::search_remember_face::Request &req,
                 planning_msgs::search_remember_face::Response &resp
                 );
 
+        /**
+         * @brief Callback for the Ask and Wait for Confirmation service.
+         *
+         * For more information about this task (the execution sequence and the
+         * parameters) you must take a look at the documentation of the 
+         * SimpleTasks::askAndWaitForConfirm method and to the 
+         * **wait_for_confirm.srv** of the planning_msgs package.
+         *
+         * To perform this task on your node, you must make a call to the 
+         * **wait_for_confirm** service of the simple_task_planner node (be 
+         * careful of the namespace!!!!).
+         */
         bool askAndWaitForConfirmCallback(
                 planning_msgs::wait_for_confirm::Request &req,
                 planning_msgs::wait_for_confirm::Response &resp
                 );
 
+        /**
+         * @brief Callback for the Wait For Start Follow service. 
+         *
+         * For more information about this task (the execution sequence and the
+         * parameters) you must take a look at the documentation of the 
+         * SimpleTasks::waitForStartFollowCommand method and to the 
+         * **wait_for_start_follow.srv** of the planning_msgs package.
+         *
+         * To perform this task on your node, you must make a call to the 
+         * **wait_for_start_follow** service of the simple_task_planner node (be 
+         * careful of the namespace!!!!).
+         */
         bool waitStartFollowCallback(
                 planning_msgs::wait_for_start_follow::Request &req,
                 planning_msgs::wait_for_start_follow::Response &resp
                 );
 
+        /**
+         * @brief Callback for the Wait For Command service. For more 
+         * information about this task (the execution sequence and the 
+         * parameters) you must take a look at the documentation
+         * of the SimpleTasks::waitForCommand method and to the 
+         * **wait_for_command.srv** of the planning_msgs package.
+         *
+         * To perform this task on your node, you must make a call to the 
+         * **wait_for_command** service of the simple_task_planner node (be 
+         * careful of the namespace!!!!).
+         */
         bool waitForCommandCallback(
                 planning_msgs::wait_for_command::Request &req,
                 planning_msgs::wait_for_command::Response &resp

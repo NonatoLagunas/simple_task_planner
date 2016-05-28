@@ -15,7 +15,7 @@ void TaskAdvertiser::startAdvertising()
     m_rememberFaceSrv = m_nh.advertiseService("search_and_remember_face", 
             &TaskAdvertiser::rememberFaceCallback, this);
 
-    m_askAndWaitForConfirmSrv = m_nh.advertiseService("wait_for_confirmation", 
+    m_askAndWaitForConfirmSrv = m_nh.advertiseService("wait_for_confirm", 
             &TaskAdvertiser::askAndWaitForConfirmCallback, this);
 
     m_waitStartFollowSrv = m_nh.advertiseService("wait_for_start_follow", 

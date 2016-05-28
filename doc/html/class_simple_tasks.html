@@ -84,6 +84,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pri-methods">Private Member Functions</a> &#124;
+<a href="#pri-attribs">Private Attributes</a> &#124;
 <a href="class_simple_tasks-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">SimpleTasks Class Reference</div>  </div>
@@ -112,6 +114,25 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa62cea5d4153b44aa0f49cee954d8dc6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_tasks.html#aa62cea5d4153b44aa0f49cee954d8dc6">faceSearchAndRemeber</a> (std::string t_findInstructions, std::string t_faceName, std::vector&lt; std::pair&lt; float, float &gt; &gt; t_headMovements=std::vector&lt; std::pair&lt; float, float &gt; &gt;())</td></tr>
 <tr class="memdesc:aa62cea5d4153b44aa0f49cee954d8dc6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform the task of remeber a person's face.  <a href="#aa62cea5d4153b44aa0f49cee954d8dc6">More...</a><br /></td></tr>
 <tr class="separator:aa62cea5d4153b44aa0f49cee954d8dc6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Private Member Functions</h2></td></tr>
+<tr class="memitem:a5997fdb1cc4d696149b5dd2462f253d7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_tasks.html#a5997fdb1cc4d696149b5dd2462f253d7">initializeHeadVector</a> (std::vector&lt; std::pair&lt; float, float &gt; &gt; &amp;t_vector)</td></tr>
+<tr class="memdesc:a5997fdb1cc4d696149b5dd2462f253d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initiaizes a vector that stores head movements to its default value.  <a href="#a5997fdb1cc4d696149b5dd2462f253d7">More...</a><br /></td></tr>
+<tr class="separator:a5997fdb1cc4d696149b5dd2462f253d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Private Attributes</h2></td></tr>
+<tr class="memitem:a6f47514f5e71977a2ff123311ad3dec2"><td class="memItemLeft" align="right" valign="top">SpeechGeneratorTasks&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_tasks.html#a6f47514f5e71977a2ff123311ad3dec2">m_spgenTasks</a></td></tr>
+<tr class="separator:a6f47514f5e71977a2ff123311ad3dec2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cf498d52ac2f3f0cf8eff17688a876d"><td class="memItemLeft" align="right" valign="top">LangUnderstandingTasks&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_tasks.html#a4cf498d52ac2f3f0cf8eff17688a876d">m_langundTasks</a></td></tr>
+<tr class="separator:a4cf498d52ac2f3f0cf8eff17688a876d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1459e7794f0b070486266456dbbc89c5"><td class="memItemLeft" align="right" valign="top">SpeechRecognitionStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_tasks.html#a1459e7794f0b070486266456dbbc89c5">m_sprec</a></td></tr>
+<tr class="separator:a1459e7794f0b070486266456dbbc89c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7fb0ede1319b6a8acc7b4e733e494f40"><td class="memItemLeft" align="right" valign="top">FaceRecognitionTasks&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_tasks.html#a7fb0ede1319b6a8acc7b4e733e494f40">m_recoFaces</a></td></tr>
+<tr class="separator:a7fb0ede1319b6a8acc7b4e733e494f40"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad01bd034086c0ff10994e0afae9a3398"><td class="memItemLeft" align="right" valign="top">HeadStatus&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_simple_tasks.html#ad01bd034086c0ff10994e0afae9a3398">m_headStatus</a></td></tr>
+<tr class="separator:ad01bd034086c0ff10994e0afae9a3398"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains methods to perform multiple robot simple tasks. </p>
@@ -239,6 +260,38 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a5997fdb1cc4d696149b5dd2462f253d7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimpleTasks::initializeHeadVector </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::pair&lt; float, float &gt; &gt; &amp;&#160;</td>
+          <td class="paramname"><em>t_vector</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initiaizes a vector that stores head movements to its default value. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t_vector</td><td>The vector to initialize. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a class="anchor" id="ae9e4541c3e71d536b21e24c81f216235"></a>
 <div class="memitem">
 <div class="memproto">
@@ -337,6 +390,112 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>True if the user gives a valid start command to the robot. False otherwise. </dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="ad01bd034086c0ff10994e0afae9a3398"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">HeadStatus SimpleTasks::m_headStatus</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Object to perform head movements. </p>
+
+</div>
+</div>
+<a class="anchor" id="a4cf498d52ac2f3f0cf8eff17688a876d"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">LangUnderstandingTasks SimpleTasks::m_langundTasks</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Object to perform language understading tasks. </p>
+
+</div>
+</div>
+<a class="anchor" id="a7fb0ede1319b6a8acc7b4e733e494f40"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">FaceRecognitionTasks SimpleTasks::m_recoFaces</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Object to prform face recognition tasks. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6f47514f5e71977a2ff123311ad3dec2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpeechGeneratorTasks SimpleTasks::m_spgenTasks</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Object to perform speech generator tasks. </p>
+
+</div>
+</div>
+<a class="anchor" id="a1459e7794f0b070486266456dbbc89c5"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">SpeechRecognitionStatus SimpleTasks::m_sprec</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>Object to know the sprec status. </p>
 
 </div>
 </div>
