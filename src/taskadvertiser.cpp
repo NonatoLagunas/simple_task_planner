@@ -12,6 +12,9 @@ TaskAdvertiser::TaskAdvertiser(ros::NodeHandle t_nh) :
 
 void TaskAdvertiser::startAdvertising()
 {
+    m_rememberFaceSrv = m_nh.advertiseService("search_and_remember_face", 
+            &TaskAdvertiser::rememberFaceCallback, this);
+
     m_askAndWaitForConfirmSrv = m_nh.advertiseService("wait_for_confirmation", 
             &TaskAdvertiser::askAndWaitForConfirmCallback, this);
 
@@ -20,6 +23,28 @@ void TaskAdvertiser::startAdvertising()
 
     m_waitForCommandSrv = m_nh.advertiseService("wait_for_command", 
             &TaskAdvertiser::waitForCommandCallback, this);
+}
+
+bool TaskAdvertiser::rememberFaceCallback( 
+        planning_msgs::search_remember_face::Request &req,
+        planning_msgs::search_remember_face::Response &resp
+        )
+{
+    std::vector<std::pair<float, float> > headMovements;
+    for(int currentHeadMov=0; currentHeadMov<req.head_movs.size();
+            currentHeadMov++)
+    {
+        headMovements.push_back(std::pair<float, float>(
+                    req.head_movs[currentHeadMov].data[0],
+                    req.head_movs[currentHeadMov].data[1]
+                    ));
+    }
+    resp.training_success = m_simpleTasks.faceSearchAndRemeber(
+            req.robot_instructions, 
+            req.face_id, 
+            headMovements);
+
+    return true;
 }
 
 bool TaskAdvertiser::waitForCommandCallback(

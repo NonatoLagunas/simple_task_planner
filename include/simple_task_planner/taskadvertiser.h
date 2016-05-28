@@ -12,10 +12,13 @@
 #ifndef _JUSTINA_TASKADVERTISER_H_
 #define _JUSTINA_TASKADVERTISER_H_
 
+#include <vector>
+#include <utility>
 #include "simple_task_planner/simpletasks.h"
 #include "planning_msgs/wait_for_confirm.h"
 #include "planning_msgs/wait_for_start_follow.h"
 #include "planning_msgs/wait_for_command.h"
+#include "planning_msgs/search_remember_face.h"
 #include "planning_msgs/CFRParams.h"
 #include "ros/ros.h"
 
@@ -41,6 +44,15 @@ class TaskAdvertiser
         ros::ServiceServer m_waitForCommandSrv; /**< ROS object to advertise 
                                                    the wait for command 
                                                    task as a service. */
+
+        ros::ServiceServer m_rememberFaceSrv; /**< ROS object to advertise 
+                                                the search and remember face 
+                                                task as a service. */
+
+        bool rememberFaceCallback(
+                planning_msgs::search_remember_face::Request &req,
+                planning_msgs::search_remember_face::Response &resp
+                );
 
         bool askAndWaitForConfirmCallback(
                 planning_msgs::wait_for_confirm::Request &req,
