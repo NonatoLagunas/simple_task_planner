@@ -4,6 +4,73 @@ SimpleTasks::SimpleTasks()
 {
 }
 
+bool SimpleTasks::askForName(std::string &t_personName, int t_attemptTimeout, 
+        int t_repeatTimeout, int t_maxTaskAttempts)
+{
+    using namespace boost::chrono;
+
+    bool nameStored=false;
+    t_personName = "";
+
+    //Loop until the person provide it's name.
+    int currentTaskAttempt=0;
+    milliseconds millisElapsed;
+    steady_clock::time_point taskStartTime = steady_clock::now();
+
+    m_sprec.startListening();
+    while(ros::ok() && millisElapsed.count() < t_attemptTimeout && !nameStored
+            && currentTaskAttempt < t_maxTaskAttempts)
+    {
+        //verify the heared sentence
+        if(m_sprec.isSentenceRecognized())
+        {
+            bool nameProvided=false;
+            //if(nameProvided = m_langTasks.isNameProvide())
+            //name provided... try to understand it
+            nameStored = askAndWaitForConfirm("I hear that your name is " + 
+                    t_personName + ", is that correct?", 20000, 10000);
+            if(nameProvided && !nameStored)
+            {
+                //the name was provided but not understand... try again
+                ++currentTaskAttempt;
+                taskStartTime = steady_clock::now();
+                millisElapsed = duration_cast<milliseconds>(
+                        taskStartTime-taskStartTime);
+                m_spgenTasks.asyncSpeech("sorry!");
+                //m_spgenTasks.asyncSpeech("please again, tell me your name");
+            }
+            m_sprec.stopListening();
+            m_sprec.startListening();
+        }
+        //Repeat the the question to the user again every t_repeatTimeOut time.
+        if(millisElapsed.count()%t_repeatTimeout == 0)
+        {
+            m_spgenTasks.asyncSpeech("please tell me your name");
+        }
+        millisElapsed = duration_cast<milliseconds>(
+                steady_clock::now() - taskStartTime
+                );
+
+        ros::spinOnce();
+    }
+
+    m_sprec.stopListening();
+
+    if(!ros::ok() || millisElapsed.count()>=t_attemptTimeout)
+    {
+        m_spgenTasks.asyncSpeech("Sorry, I cannot hear you.");
+        return false;
+    }
+    if(!nameStored)
+    {
+        m_spgenTasks.asyncSpeech("Sorry, I cannot understand you.");
+        return false;
+    }
+
+    m_spgenTasks.asyncSpeech("Nice to meet you " + t_personName);
+    return true;
+}
+
 bool SimpleTasks::askAndWaitForConfirm(std::string t_questionToAsk, 
         int t_timeout, int t_repeatTimeout)
 {

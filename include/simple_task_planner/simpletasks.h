@@ -134,7 +134,7 @@ class SimpleTasks
          * @param[in] t_timeout The amount of time (milliseconds) that the robot
          * will wait for the command.
          * @param[in] t_repeatTimeout The amount of time (milliseconds) that the
-         * robot will repeat the start sentence tot he user.
+         * robot must wait to repeat the start sentence to the user.
          * @return True if the user gives a valid guide command to the robot.
          * False otherwise.
          */
@@ -198,5 +198,33 @@ class SimpleTasks
                 std::vector<std::pair<float, float> > t_headMovements =
                     std::vector<std::pair<float, float> >()
                 );
+        
+        /**
+         * @brief Performs the task of ask for a person's name and store it.
+         *
+         * Assuming there is a person in front of the robot.
+         * This tasks consists in the following steps:
+         *  1. The robot asks for the person's name.
+         *  2. The robot waits until the person provide its name. While the 
+         *      robot is waiting it will repeat the question with a specified
+         *      frequency.
+         *  3. When the person provides his name, the robot will ask for a name
+         *      confimation to the person. 
+         *  4. If the confirmation is positive, the task end. If not, the task
+         *      start again from the begginning (there will be an attempts 
+         *      limit).
+         *
+         * @param[out] t_personName Stores the obtained person's name.
+         * @param[in] attemptTimeout The limit time of each learn name attempt.
+         * @param[in] t_repeatTimeout The amount of time (milliseconds) that the
+         * robot must wait to ask to the user for her/his name again.
+         * @param[in] t_maxTaskAttempts The max number of attempts in the 
+         * confirmation step.
+         * @return True if the person's name was obtained succesfully. False 
+         * otherwise.
+         */
+        bool askForName(std::string &t_personName, int attemptTimeout = 30000,
+                int t_repeatTimeout = 10000, int t_maxTaskAttempts = 3);
+
 };
 #endif
