@@ -99,9 +99,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a55b983d7a922d0903a80d070f7b520c5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a55b983d7a922d0903a80d070f7b520c5"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>TaskAdvertiser</b> (ros::NodeHandle nh=ros::NodeHandle(&quot;simple_task_planner&quot;))</td></tr>
-<tr class="separator:a55b983d7a922d0903a80d070f7b520c5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab04fae5df12efd694b51d39b8249f737"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab04fae5df12efd694b51d39b8249f737"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>TaskAdvertiser</b> (ros::NodeHandle t_nh=ros::NodeHandle(&quot;simple_task_planner&quot;))</td></tr>
+<tr class="separator:ab04fae5df12efd694b51d39b8249f737"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23ee8ef6b343f52cd7b5d7d0dcbd6fe1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a23ee8ef6b343f52cd7b5d7d0dcbd6fe1"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#a23ee8ef6b343f52cd7b5d7d0dcbd6fe1">startAdvertising</a> ()</td></tr>
 <tr class="memdesc:a23ee8ef6b343f52cd7b5d7d0dcbd6fe1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Advertise the simple tasks as services. <br /></td></tr>
@@ -109,15 +109,21 @@ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="clas
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
+<tr class="memitem:a33255a263998aa137f442504d8438be8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#a33255a263998aa137f442504d8438be8">askForNameCallback</a> (planning_msgs::ask_store_name::Request &amp;req, planning_msgs::ask_store_name::Response &amp;resp)</td></tr>
+<tr class="memdesc:a33255a263998aa137f442504d8438be8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for the Ask and Store Name service.  <a href="#a33255a263998aa137f442504d8438be8">More...</a><br /></td></tr>
+<tr class="separator:a33255a263998aa137f442504d8438be8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af9a75fa9dc0093208d0a540be856a732"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#af9a75fa9dc0093208d0a540be856a732">rememberFaceCallback</a> (planning_msgs::search_remember_face::Request &amp;req, planning_msgs::search_remember_face::Response &amp;resp)</td></tr>
 <tr class="memdesc:af9a75fa9dc0093208d0a540be856a732"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for the Search and Remember Face service.  <a href="#af9a75fa9dc0093208d0a540be856a732">More...</a><br /></td></tr>
 <tr class="separator:af9a75fa9dc0093208d0a540be856a732"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12d4edf2bc4c98b845b59c13a48b1cff"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#a12d4edf2bc4c98b845b59c13a48b1cff">askAndWaitForConfirmCallback</a> (planning_msgs::wait_for_confirm::Request &amp;req, planning_msgs::wait_for_confirm::Response &amp;resp)</td></tr>
 <tr class="memdesc:a12d4edf2bc4c98b845b59c13a48b1cff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for the Ask and Wait for Confirmation service.  <a href="#a12d4edf2bc4c98b845b59c13a48b1cff">More...</a><br /></td></tr>
 <tr class="separator:a12d4edf2bc4c98b845b59c13a48b1cff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8f177e18e3131f0200730ae334c542f1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#a8f177e18e3131f0200730ae334c542f1">waitStartFollowCallback</a> (planning_msgs::wait_for_start_follow::Request &amp;req, planning_msgs::wait_for_start_follow::Response &amp;resp)</td></tr>
-<tr class="memdesc:a8f177e18e3131f0200730ae334c542f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for the Wait For Start Follow service.  <a href="#a8f177e18e3131f0200730ae334c542f1">More...</a><br /></td></tr>
-<tr class="separator:a8f177e18e3131f0200730ae334c542f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac2e47bae96082ecbdc420825bbfdb23a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#ac2e47bae96082ecbdc420825bbfdb23a">waitForStartGuideCallback</a> (planning_msgs::wait_for_switch::Request &amp;req, planning_msgs::wait_for_switch::Response &amp;resp)</td></tr>
+<tr class="memdesc:ac2e47bae96082ecbdc420825bbfdb23a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for the Wait For Start Guide service.  <a href="#ac2e47bae96082ecbdc420825bbfdb23a">More...</a><br /></td></tr>
+<tr class="separator:ac2e47bae96082ecbdc420825bbfdb23a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6eafba7d6ba3c65ed7464e146682921f"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#a6eafba7d6ba3c65ed7464e146682921f">waitStartFollowCallback</a> (planning_msgs::wait_for_switch::Request &amp;req, planning_msgs::wait_for_switch::Response &amp;resp)</td></tr>
+<tr class="memdesc:a6eafba7d6ba3c65ed7464e146682921f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for the Wait For Start Follow service.  <a href="#a6eafba7d6ba3c65ed7464e146682921f">More...</a><br /></td></tr>
+<tr class="separator:a6eafba7d6ba3c65ed7464e146682921f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1a150781421013d9c08d58e8700f9c88"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#a1a150781421013d9c08d58e8700f9c88">waitForCommandCallback</a> (planning_msgs::wait_for_command::Request &amp;req, planning_msgs::wait_for_command::Response &amp;resp)</td></tr>
 <tr class="memdesc:a1a150781421013d9c08d58e8700f9c88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callback for the Wait For Command service. For more information about this task (the execution sequence and the parameters) you must take a look at the documentation of the <a class="el" href="class_simple_tasks.html#ae9e4541c3e71d536b21e24c81f216235" title="Perform the task of wait for a valid voice command comming from the user. ">SimpleTasks::waitForCommand</a> method and to the <b>wait_for_command.srv</b> of the planning_msgs package.  <a href="#a1a150781421013d9c08d58e8700f9c88">More...</a><br /></td></tr>
 <tr class="separator:a1a150781421013d9c08d58e8700f9c88"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -138,6 +144,10 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a57822e31555f279e363c19555ff01683"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af4a9ec62d358dd0bfadc7f14ea56976c"><td class="memItemLeft" align="right" valign="top">ros::ServiceServer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#af4a9ec62d358dd0bfadc7f14ea56976c">m_rememberFaceSrv</a></td></tr>
 <tr class="separator:af4a9ec62d358dd0bfadc7f14ea56976c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa3dc53cedc6cdd30d2aa2fa26cd998c4"><td class="memItemLeft" align="right" valign="top">ros::ServiceServer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#aa3dc53cedc6cdd30d2aa2fa26cd998c4">m_waitForStartGuideSrv</a></td></tr>
+<tr class="separator:aa3dc53cedc6cdd30d2aa2fa26cd998c4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6413b132f00fc7aec17edd1b9d59c07b"><td class="memItemLeft" align="right" valign="top">ros::ServiceServer&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_task_advertiser.html#a6413b132f00fc7aec17edd1b9d59c07b">m_askForNameSrv</a></td></tr>
+<tr class="separator:a6413b132f00fc7aec17edd1b9d59c07b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class to advertise the simple tasks as ROS services. </p>
@@ -180,6 +190,44 @@ Private Attributes</h2></td></tr>
 <p>Callback for the Ask and Wait for Confirmation service. </p>
 <p>For more information about this task (the execution sequence and the parameters) you must take a look at the documentation of the <a class="el" href="class_simple_tasks.html#ac72035a3f58ac7103cb8ae73666dfd06" title="Performs the simple task to ask a question to the user and wait for a confirmation from the user...">SimpleTasks::askAndWaitForConfirm</a> method and to the <b>wait_for_confirm.srv</b> of the planning_msgs package.</p>
 <p>To perform this task on your node, you must make a call to the <b>wait_for_confirm</b> service of the simple_task_planner node (be careful of the namespace!!!!). </p>
+
+</div>
+</div>
+<a class="anchor" id="a33255a263998aa137f442504d8438be8"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TaskAdvertiser::askForNameCallback </td>
+          <td>(</td>
+          <td class="paramtype">planning_msgs::ask_store_name::Request &amp;&#160;</td>
+          <td class="paramname"><em>req</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">planning_msgs::ask_store_name::Response &amp;&#160;</td>
+          <td class="paramname"><em>resp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback for the Ask and Store Name service. </p>
+<p>For more information about this task (the execution sequence and the parameters) you must take a look at the documentation of the <a class="el" href="class_simple_tasks.html#a8b8bed28f21c4eb4f823d4a4289a86ee" title="Performs the task of ask for a person&#39;s name and store it. ">SimpleTasks::askForName</a> method and to the <b>ask_store_name.srv</b> of the planning_msgs package.</p>
+<p>To perform this task on your node, you must make a call to the <b>ask_store_name</b> service of the simple_task_planner node (be careful of the namespace!!!!). </p>
 
 </div>
 </div>
@@ -258,7 +306,45 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a8f177e18e3131f0200730ae334c542f1"></a>
+<a class="anchor" id="ac2e47bae96082ecbdc420825bbfdb23a"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool TaskAdvertiser::waitForStartGuideCallback </td>
+          <td>(</td>
+          <td class="paramtype">planning_msgs::wait_for_switch::Request &amp;&#160;</td>
+          <td class="paramname"><em>req</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">planning_msgs::wait_for_switch::Response &amp;&#160;</td>
+          <td class="paramname"><em>resp</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Callback for the Wait For Start Guide service. </p>
+<p>For more information about this task (the execution sequence and the parameters) you must take a look at the documentation of the <a class="el" href="class_simple_tasks.html#a7a1383e20af5750c86310b2e563a7cdf" title="Performs the simple task to wait for a start-guiding voice command comming from the user...">SimpleTasks::waitForStartGuideCommand</a> method and to the <b>wait_for_switch.srv</b> of the planning_msgs package.</p>
+<p>To perform this task on your node, you must make a call to the <b>wait_for_start_guide</b> service of the simple_task_planner node (be careful of the namespace!!!!). </p>
+
+</div>
+</div>
+<a class="anchor" id="a6eafba7d6ba3c65ed7464e146682921f"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -268,13 +354,13 @@ Private Attributes</h2></td></tr>
         <tr>
           <td class="memname">bool TaskAdvertiser::waitStartFollowCallback </td>
           <td>(</td>
-          <td class="paramtype">planning_msgs::wait_for_start_follow::Request &amp;&#160;</td>
+          <td class="paramtype">planning_msgs::wait_for_switch::Request &amp;&#160;</td>
           <td class="paramname"><em>req</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">planning_msgs::wait_for_start_follow::Response &amp;&#160;</td>
+          <td class="paramtype">planning_msgs::wait_for_switch::Response &amp;&#160;</td>
           <td class="paramname"><em>resp</em>&#160;</td>
         </tr>
         <tr>
@@ -291,7 +377,7 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Callback for the Wait For Start Follow service. </p>
-<p>For more information about this task (the execution sequence and the parameters) you must take a look at the documentation of the <a class="el" href="class_simple_tasks.html#af7a9088f0d7c9158b90e7c6c7bc57f93" title="Performs the simple task to wait for a start-follow voice command comming from the user...">SimpleTasks::waitForStartFollowCommand</a> method and to the <b>wait_for_start_follow.srv</b> of the planning_msgs package.</p>
+<p>For more information about this task (the execution sequence and the parameters) you must take a look at the documentation of the <a class="el" href="class_simple_tasks.html#af7a9088f0d7c9158b90e7c6c7bc57f93" title="Performs the simple task to wait for a start-follow voice command comming from the user...">SimpleTasks::waitForStartFollowCommand</a> method and to the <b>wait_for_switch.srv</b> of the planning_msgs package.</p>
 <p>To perform this task on your node, you must make a call to the <b>wait_for_start_follow</b> service of the simple_task_planner node (be careful of the namespace!!!!). </p>
 
 </div>
@@ -315,6 +401,27 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>ROS object to advertise the wait for confirmation task as a service. </p>
+
+</div>
+</div>
+<a class="anchor" id="a6413b132f00fc7aec17edd1b9d59c07b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ros::ServiceServer TaskAdvertiser::m_askForNameSrv</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>ROS object to advertise the ask and store name task as a service. </p>
 
 </div>
 </div>
@@ -420,6 +527,27 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 <p>ROS object to advertise the wait for command task as a service. </p>
+
+</div>
+</div>
+<a class="anchor" id="aa3dc53cedc6cdd30d2aa2fa26cd998c4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ros::ServiceServer TaskAdvertiser::m_waitForStartGuideSrv</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>ROS object to advertise the wait for star guide command task as a service. </p>
 
 </div>
 </div>
