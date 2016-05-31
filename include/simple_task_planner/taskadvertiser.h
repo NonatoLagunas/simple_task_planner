@@ -162,7 +162,7 @@ class TaskAdvertiser
     public:
 
         TaskAdvertiser(
-                ros::NodeHandle nh = ros::NodeHandle("simple_task_planner")
+                ros::NodeHandle t_nh = ros::NodeHandle("simple_task_planner")
                 );
 
         /**

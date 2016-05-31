@@ -2,6 +2,26 @@
 
 SimpleTasks::SimpleTasks()
 {
+    //initialize the arms modules
+    m_rightArmTasks = new RobotArmTasks(); 
+    m_leftArmTasks = new RobotArmTasks(0,
+            "/manipulation/manip_pln/la_goto_angles",
+            "/manipulation/manip_pln/la_pose_wrt_arm",
+            "/manipulation/manip_pln/la_pose_wrt_robot",
+            "/manipulation/manip_pln/la_goto_loc",
+            "/manipulation/manip_pln/la_move",
+            "/manipulation/la_goal_reached"
+            );
+    m_rightArmStatus = new RobotArmStatus();
+    m_leftArmStatus = new RobotArmStatus(
+            0, 7, "/hardware/left_arm/current_pose",
+            "/hardware/left_arm/current_gripper",
+            "/hardware/left_arm/goal_gripper",
+            "/hardware/left_arm/goal_pose",
+            "/hardware/left_arm/torque_gripper",
+            "/hardware/left_arm/goal_torque",
+            "/hardware/robot_state/left_arm_battery"
+            );
 }
 
 bool SimpleTasks::askForName(std::string &t_personName, int t_attemptTimeout, 

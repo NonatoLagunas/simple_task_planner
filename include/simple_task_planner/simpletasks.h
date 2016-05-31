@@ -28,6 +28,9 @@
 #include "robot_service_manager/langunderstandingtasks.h"
 #include "robot_service_manager/headstatus.h"
 #include "robot_service_manager/facerecognitiontasks.h"
+#include "robot_service_manager/navigationtasks.h"
+#include "robot_service_manager/robotarmtasks.h"
+#include "robot_service_manager/robotarmstatus.h"
 
 class SimpleTasks
 {
@@ -45,6 +48,19 @@ class SimpleTasks
                                             recognition tasks. */
 
         HeadStatus m_headStatus; /**< Object to perform head movements. */
+
+        NavigationTasks m_navTasks; /**< Object to perform mobile base 
+                                      motions. */
+
+        //The arms tasks are pointers to prevent to call the constructor in the
+        //definition file, instead of that the constructors are called from
+        //the constructor of this class 
+        RobotArmTasks *m_rightArmTasks; /**< Object to manage the right arm. */ 
+
+        RobotArmTasks *m_leftArmTasks; /**< Object to manage the left arm. */ 
+        
+        RobotArmStatus *m_rightArmStatus;
+        RobotArmStatus *m_leftArmStatus;
 
         /**
          * @brief Initiaizes a vector that stores head movements to its default
@@ -225,6 +241,55 @@ class SimpleTasks
          */
         bool askForName(std::string &t_personName, int attemptTimeout = 30000,
                 int t_repeatTimeout = 10000, int t_maxTaskAttempts = 3);
+
+        /**
+         * @brief Perform the task of drop an object.
+         *
+         * Assuming that the robot has an object in his gripper.
+         * This task consist in the following steps:
+         *  1. The robot approachs to the location where the object will be
+         *  droped.
+         *  2. The robot aligns to an item near to the droping location, this 
+         *  item could be a furniture, trash bin, a person, etc.
+         *  3. When the robot is in front of the item, it move it arm to a
+         *  position that allow it drop the object without collition.
+         *  4. When the robot arm reachs the drop position, it releases the 
+         *  object by open it's gripper.
+         *  5. The robot close its gripper.
+         *
+         * @param t_dropLocation The location where the object will be dropped.
+         * @param t_armToUse The arm to move to the drop predef arm location. 
+         * It must be the arm where the robot has the object to drop.
+         * @return True if the robot performs the task successfully. False 
+         * otherwise.
+         */
+        bool dropObject(std::string &t_dropLocation, int t_armToUse);
+
+        /**
+         * @brief Perform the task of place an object on an item.
+         *
+         * Assuming that the robot has an object in his gripper.
+         * This task consist in the following steps:
+         *  1. The robot approachs to the location where the object will be
+         *  placed.
+         *  2. The robot aligns to an item near to the placing location, this 
+         *  item could be a furniture, a person, etc.
+         *  3. When the robot is in front of the item, it move it arm to a
+         *  position that allow it to gently place the object without collide
+         *  with other objects.
+         *  4. When the robot arm reachs the place position, it releases the 
+         *  object by open it's gripper.
+         *  4. When the object is in place, the robot arm returns to an standby
+         *  position.
+         *  5. The robot close its gripper.
+         *
+         * @param t_placeLocation The location where the object will be placed.
+         * @param t_armToUse The arm to move close to the item to place the 
+         * object. It must be the arm where the robot has the object to drop.
+         * @return True if the robot performs the task successfully. False 
+         * otherwise.
+         */
+        bool placeObject(std::string &t_placeLocation, int t_armToUse);
 
 };
 #endif
