@@ -12,6 +12,12 @@ TaskAdvertiser::TaskAdvertiser(ros::NodeHandle t_nh) :
 
 void TaskAdvertiser::startAdvertising()
 {
+    m_placeObjectSrv = m_nh.advertiseService("place_object", 
+            &TaskAdvertiser::placeObjectCallback, this);
+
+    m_dropObjectSrv = m_nh.advertiseService("drop_object", 
+            &TaskAdvertiser::dropObjectCallback, this);
+
     m_rememberFaceSrv = m_nh.advertiseService("search_and_remember_face", 
             &TaskAdvertiser::rememberFaceCallback, this);
 
@@ -30,6 +36,26 @@ void TaskAdvertiser::startAdvertising()
     m_askForNameSrv = m_nh.advertiseService("ask_store_name", 
             &TaskAdvertiser::askForNameCallback, this);
 
+}
+
+bool TaskAdvertiser::placeObjectCallback(
+        planning_msgs::place_object::Request &req,
+        planning_msgs::place_object::Response &resp
+        )
+{
+    resp.task_success = m_simpleTasks.placeObject(req.dest_location, 
+            req.arm_to_use);
+    return true;
+}
+
+bool TaskAdvertiser::dropObjectCallback(
+        planning_msgs::place_object::Request &req,
+        planning_msgs::place_object::Response &resp
+        )
+{
+    resp.task_success = m_simpleTasks.dropObject(req.dest_location,
+            req.arm_to_use);
+    return true;
 }
 
 bool TaskAdvertiser::askForNameCallback(

@@ -20,6 +20,7 @@
 #include "planning_msgs/wait_for_command.h"
 #include "planning_msgs/search_remember_face.h"
 #include "planning_msgs/ask_store_name.h"
+#include "planning_msgs/place_object.h"
 #include "planning_msgs/CFRParams.h"
 #include "ros/ros.h"
 
@@ -58,6 +59,47 @@ class TaskAdvertiser
         ros::ServiceServer m_askForNameSrv; /**< ROS object to advertise 
                                               the ask and store name task 
                                               as a service. */
+        
+        ros::ServiceServer m_dropObjectSrv; /**< ROS object to advertise 
+                                              the drop object task 
+                                              as a service. */
+
+        ros::ServiceServer m_placeObjectSrv; /**< ROS object to advertise 
+                                              the place object task 
+                                              as a service. */
+        /**
+         * @brief Callback for the Place Object service.
+         *
+         * For more information about this task (the execution sequence and the
+         * parameters) you must take a look at the documentation of the 
+         * SimpleTasks::placeObject method and to the 
+         * **place_object.srv** of the planning_msgs package.
+         *
+         * To perform this task on your node, you must make a call to the 
+         * **place_object** service of the simple_task_planner node 
+         * (be careful of the namespace!!!!).
+         */
+        bool placeObjectCallback(
+                planning_msgs::place_object::Request &req,
+                planning_msgs::place_object::Response &resp
+                );
+
+        /**
+         * @brief Callback for the Drop Object service.
+         *
+         * For more information about this task (the execution sequence and the
+         * parameters) you must take a look at the documentation of the 
+         * SimpleTasks::dropObject method and to the 
+         * **place_object.srv** of the planning_msgs package.
+         *
+         * To perform this task on your node, you must make a call to the 
+         * **drop_object** service of the simple_task_planner node 
+         * (be careful of the namespace!!!!).
+         */
+        bool dropObjectCallback(
+                planning_msgs::place_object::Request &req,
+                planning_msgs::place_object::Response &resp
+                );
 
         /**
          * @brief Callback for the Ask and Store Name service.
