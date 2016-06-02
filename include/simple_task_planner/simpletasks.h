@@ -291,5 +291,38 @@ class SimpleTasks
          */
         bool placeObject(std::string &t_placeLocation, int t_armToUse);
 
+        /**
+         * @brief Performs the task of find a person in a given location.
+         *
+         * This task consist on the following steps:
+         *  1. The robot moves to a valid string location (this location should
+         *  be in the configuration of the motion planner map).
+         *  2. Once in the location, the robot starts to search for a person 
+         *  face. The task end with the result of the search.
+         *
+         * @param t_personFaceID The face ID of the person to search.
+         * @param t_searchLocation The string location where the robot must 
+         * searchs for the person.
+         * @param[out] t_faceConfiguration The properties of the persons face.
+         * @return True if the task was completed succesfully. False otherwise.
+         */
+        bool findPersonInLocation(
+                std::string &t_personFaceID, 
+                std::string &t_searchLocation, 
+                FaceRecognitionTasks::FaceObject &t_faceConfiguration
+                );
+
+        /**
+         * Performs a linear search in order to find an specific face id
+         * in a set of detected faces.
+         *
+         * @param[in] t_facesList The list to search the face id on.
+         * @param t_faceID The face id to search.
+         * @return The list index where the face id was found. If the face id
+         * wasn't found on the list, a value of -1 will be returned.
+         */
+        int linearSearchFaceID(
+                std::vector<FaceRecognitionTasks::FaceObject> &t_facesList, 
+                std::string t_faceID);
 };
 #endif
