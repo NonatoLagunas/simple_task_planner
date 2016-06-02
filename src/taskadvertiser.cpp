@@ -12,6 +12,10 @@ TaskAdvertiser::TaskAdvertiser(ros::NodeHandle t_nh) :
 
 void TaskAdvertiser::startAdvertising()
 {
+
+    m_findPersonInLocationSrv= m_nh.advertiseService("find_person_in_location", 
+            &TaskAdvertiser::findPersonInLocationCallback, this);
+
     m_placeObjectSrv = m_nh.advertiseService("place_object", 
             &TaskAdvertiser::placeObjectCallback, this);
 
@@ -36,6 +40,27 @@ void TaskAdvertiser::startAdvertising()
     m_askForNameSrv = m_nh.advertiseService("ask_store_name", 
             &TaskAdvertiser::askForNameCallback, this);
 
+}
+
+bool TaskAdvertiser::findPersonInLocationCallback(
+        planning_msgs::find_person::Request &req,
+        planning_msgs::find_person::Response &resp
+        )
+{
+    FaceRecognitionTasks::FaceObject foundFace;
+    resp.task_success = m_simpleTasks.findPersonInLocation(req.person_face_id, 
+            req.location, foundFace);
+
+    resp.person_face.id = foundFace.faceID;
+    resp.person_face.face_centroid = foundFace.faceCentroid;
+    resp.person_face.smile = foundFace.smilingFace;
+    resp.person_face.gender = foundFace.faceGender;
+    for(int i=0; i<foundFace.boundingBox.size(); i++)
+    {
+        resp.person_face.bounding_box.push_back(foundFace.boundingBox[i]);
+    }
+
+    return true;
 }
 
 bool TaskAdvertiser::placeObjectCallback(

@@ -21,6 +21,7 @@
 #include "planning_msgs/search_remember_face.h"
 #include "planning_msgs/ask_store_name.h"
 #include "planning_msgs/place_object.h"
+#include "planning_msgs/find_person.h"
 #include "planning_msgs/CFRParams.h"
 #include "ros/ros.h"
 
@@ -67,6 +68,29 @@ class TaskAdvertiser
         ros::ServiceServer m_placeObjectSrv; /**< ROS object to advertise 
                                               the place object task 
                                               as a service. */
+        
+        ros::ServiceServer m_findPersonInLocationSrv; /**< ROS object to 
+                                            advertise the find a person in 
+                                            place object as a service. */
+
+        /**
+         * @brief Callback for the Find Person in Location service.
+         *
+         * For more information about this task (the execution sequence and the
+         * parameters) you must take a look at the documentation of the 
+         * SimpleTasks::findPersonInLocation method and to the 
+         * **find_person.srv** of the planning_msgs package.
+         *
+         * To perform this task on your node, you must make a call to the 
+         * **find_person_in_location** service of the simple_task_planner node 
+         * (be careful of the namespace!!!!).
+         */
+        bool findPersonInLocationCallback(
+                planning_msgs::find_person::Request &req,
+                planning_msgs::find_person::Response &resp
+                );
+
+
         /**
          * @brief Callback for the Place Object service.
          *
