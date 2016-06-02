@@ -35,7 +35,7 @@ bool SimpleTasks::faceSearchAndRemeber(std::string t_findInstructions,
         headWaitDuration.sleep();
 
         //Try to train the face on the current head position
-        if((faceTrained = m_recoFaces.trainFace(t_faceID, 3000)))
+        if((faceTrained = m_recoFaces.trainFace(t_faceID, 10000, 10)))
         {
             m_spgenTasks.syncSpeech("human, smile", 5000);
             m_recoFaces.trainFace(t_faceID, 3000);
