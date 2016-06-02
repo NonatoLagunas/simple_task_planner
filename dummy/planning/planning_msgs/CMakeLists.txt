@@ -9,6 +9,9 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  vision_msgs
+  sensor_msgs
+  geometry_msgs
 )
 
 ## Generate messages in the 'msg' folder
@@ -23,6 +26,8 @@ add_service_files(FILES ${SERVICE_FILES})
  generate_messages(
    DEPENDENCIES
    std_msgs
+   vision_msgs
+   geometry_msgs
  )
 
 ###################################
