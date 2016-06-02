@@ -9,7 +9,7 @@ bool SimpleTasks::placeObject(std::string &t_placeLocation, int t_armToUse)
     int armTimeout = 10000;
 
     //move the robot to the location where the object will be droped
-    bool navSuccess;
+    bool navSuccess=false;
     int navAttempts = 0;
     while(!navSuccess && navAttempts < maxAttemptPerTask)
     {
@@ -82,7 +82,7 @@ bool SimpleTasks::dropObject(std::string &t_dropLocation, int t_armToUse)
     int armTimeout = 10000;
 
     //move the robot to the location where the object will be droped
-    bool navSuccess;
+    bool navSuccess=false;
     int navAttempts = 0;
     while(!navSuccess && navAttempts < maxAttemptPerTask)
     {
